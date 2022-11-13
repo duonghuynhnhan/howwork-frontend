@@ -1,11 +1,4 @@
-import {
-  UserHomePage,
-  UserNotifications,
-  UserMyDay,
-  UserProjects,
-  UserTasks,
-  UserSummary,
-} from '../views'
+import { UserHomePage, UserNotifications, UserMyDay, UserProjects, UserSummary } from '../views'
 
 const userRoutes = [
   { path: '/user/home', exact: true, name: 'UserHomepage', element: UserHomePage },
@@ -26,12 +19,6 @@ const userRoutes = [
     exact: true,
     name: 'UserProject',
     element: UserProjects,
-  },
-  {
-    path: '/user/tasks',
-    exact: true,
-    name: 'UserTasks',
-    element: UserTasks,
   },
   {
     path: '/user/summary',

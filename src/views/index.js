@@ -1,14 +1,7 @@
 import Home from './home'
 import { Login, ForgotPassword } from './account'
 import { AdminHomePage, AdminNotifications, AdminProjects, AdminSummary, AdminTasks } from './admin'
-import {
-  UserHomePage,
-  UserNotifications,
-  UserMyDay,
-  UserProjects,
-  UserTasks,
-  UserSummary,
-} from './user'
+import { UserHomePage, UserNotifications, UserMyDay, UserProjects, UserSummary } from './user'
 
 export {
   Home,
@@ -23,6 +16,5 @@ export {
   UserNotifications,
   UserMyDay,
   UserProjects,
-  UserTasks,
   UserSummary,
 }

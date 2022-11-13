@@ -11,14 +11,33 @@ import {
   CTableHead,
   CTableHeaderCell,
   CTableRow,
+  CTableBody,
+  CTableDataCell,
 } from '@coreui/react'
-import CIcon from '@coreui/icons-react'
-import { cilPeople } from '@coreui/icons'
 
 function UserProjects() {
   useEffect(() => {
     document.title = 'Kevin Duong | Projects'
   })
+
+  const projects = [
+    {
+      name: 'Real',
+      leader: 'Perez',
+      createdDate: '12/11/2022',
+      timeToStart: '12/11/2022',
+      deadline: '13/11/2022',
+      timeToDone: '3 hours',
+    },
+    {
+      name: 'Portugal',
+      leader: 'Ronaldo',
+      createdDate: '13/11/2022',
+      timeToStart: '13/11/2022',
+      deadline: '15/11/2022',
+      timeToDone: '4 hours',
+    },
+  ]
 
   return (
     <>
@@ -51,16 +70,26 @@ function UserProjects() {
           <CTable align="middle" className="mb-0 border" hover responsive>
             <CTableHead color="light">
               <CTableRow>
-                <CTableHeaderCell className="text-center">
-                  <CIcon icon={cilPeople} />
-                </CTableHeaderCell>
-                <CTableHeaderCell>User</CTableHeaderCell>
-                <CTableHeaderCell className="text-center">Country</CTableHeaderCell>
-                <CTableHeaderCell>Usage</CTableHeaderCell>
-                <CTableHeaderCell className="text-center">Payment Method</CTableHeaderCell>
-                <CTableHeaderCell>Activity</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Name</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Leader</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Created Date</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Time to start</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Deadline</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Time to done</CTableHeaderCell>
               </CTableRow>
             </CTableHead>
+            <CTableBody>
+              {projects.map((project, index) => (
+                <CTableRow v-for="project in projects" key={index}>
+                  <CTableDataCell>{project.name}</CTableDataCell>
+                  <CTableDataCell>{project.leader}</CTableDataCell>
+                  <CTableDataCell>{project.createdDate}</CTableDataCell>
+                  <CTableDataCell>{project.timeToStart}</CTableDataCell>
+                  <CTableDataCell>{project.deadline}</CTableDataCell>
+                  <CTableDataCell>{project.timeToDone}</CTableDataCell>
+                </CTableRow>
+              ))}
+            </CTableBody>
           </CTable>
         </CCardBody>
       </CCard>
