@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler, CNavItem } from '@coreui/react'
-import { cilHouse, cilStar, cilNotes, cilCommand, cilChart } from '@coreui/icons'
+import { cilHouse, cilNotes, cilChart, cilUserFollow, cilPeople } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
@@ -19,21 +19,21 @@ const navigation = [
   },
   {
     component: CNavItem,
-    name: 'Important',
-    to: '/admin/important',
-    icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
     name: 'Project',
     to: '/admin/projects',
     icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,
-    name: 'Task',
-    to: '/admin/tasks',
-    icon: <CIcon icon={cilCommand} customClassName="nav-icon" />,
+    name: 'Create User',
+    to: '/admin/create-user',
+    icon: <CIcon icon={cilUserFollow} customClassName="nav-icon" />,
+  },
+  {
+    component: CNavItem,
+    name: 'Create Admin',
+    to: '/admin/create-admin',
+    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
   },
   {
     component: CNavItem,

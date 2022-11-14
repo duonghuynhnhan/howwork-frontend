@@ -19,8 +19,8 @@ const navigation = [
   },
   {
     component: CNavItem,
-    name: 'My Day',
-    to: '/user/myday',
+    name: 'My Tasks',
+    to: '/user/my-tasks',
     icon: <CIcon icon={cilBolt} customClassName="nav-icon" />,
   },
   {

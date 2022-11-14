@@ -28,8 +28,8 @@ function ForgotPassword() {
             <CCard className="mx-4">
               <CCardBody className="p-4">
                 <CForm>
-                  <h1>ForgotPassword</h1>
-                  <p className="text-medium-emphasis">Create your account</p>
+                  <h1>Forgot Password</h1>
+                  <p className="text-medium-emphasis">Input some information to get your account</p>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
@@ -44,24 +44,10 @@ function ForgotPassword() {
                     <CInputGroupText>
                       <CIcon icon={cilLockLocked} />
                     </CInputGroupText>
-                    <CFormInput
-                      type="password"
-                      placeholder="Password"
-                      autoComplete="new-password"
-                    />
-                  </CInputGroup>
-                  <CInputGroup className="mb-4">
-                    <CInputGroupText>
-                      <CIcon icon={cilLockLocked} />
-                    </CInputGroupText>
-                    <CFormInput
-                      type="password"
-                      placeholder="Repeat password"
-                      autoComplete="new-password"
-                    />
+                    <CFormInput type="text" placeholder="Your key" autoComplete="key" />
                   </CInputGroup>
                   <div className="d-grid">
-                    <CButton color="success">Create Account</CButton>
+                    <CButton color="success">Check</CButton>
                   </div>
                 </CForm>
               </CCardBody>

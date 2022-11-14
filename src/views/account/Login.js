@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, NavLink } from 'react-router-dom'
 import {
   CButton,
   CCard,
@@ -11,6 +11,7 @@ import {
   CInputGroup,
   CInputGroupText,
   CRow,
+  CNavLink,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
@@ -24,7 +25,7 @@ function Login() {
   const navigate = useNavigate()
 
   const handleSubmit = () => {
-    navigate('/user/home')
+    navigate('/admin/home')
   }
 
   return (
@@ -61,7 +62,9 @@ function Login() {
                     </CCol>
                     <CCol xs={6} className="text-right">
                       <CButton color="link" className="px-0">
-                        Forgot password?
+                        <CNavLink to="/account/forgot-password" component={NavLink}>
+                          Forgot Password
+                        </CNavLink>
                       </CButton>
                     </CCol>
                   </CRow>

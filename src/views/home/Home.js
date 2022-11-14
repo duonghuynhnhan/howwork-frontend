@@ -1,31 +1,34 @@
-import { CButton, CContainer, CHeaderNav, CNavItem, CNavLink } from '@coreui/react'
+import { CButton, CContainer, CNavLink, CImage } from '@coreui/react'
 import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+
+import home from '../../assets/images/avatars/home.png'
 
 function Home() {
   useEffect(() => {
     document.title = 'Howwork'
   })
+
   return (
     <div>
       <CContainer fluid>
-        <h2>Homepage - howwork</h2>
-        <CHeaderNav className="d-none d-md-flex me-auto">
-          <CNavItem>
+        <div>
+          <div style={{ fontSize: '40px' }}>Howwork</div>
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '-50px' }}>
             <CButton>
-              <CNavLink to="/account/login" component={NavLink}>
+              <CNavLink to="/account/login" component={NavLink} style={{ height: '30px' }}>
                 Login
               </CNavLink>
             </CButton>
-          </CNavItem>
-          <CNavItem>
-            <CButton color="secondary">
-              <CNavLink to="/account/forgot-password" component={NavLink}>
-                Forgot password
-              </CNavLink>
-            </CButton>
-          </CNavItem>
-        </CHeaderNav>
+          </div>
+        </div>
+
+        <hr></hr>
+
+        <div>
+          <CImage rounded src={home} width={1410} height={720} />
+        </div>
       </CContainer>
     </div>
   )

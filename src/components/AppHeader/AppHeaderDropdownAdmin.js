@@ -11,7 +11,7 @@ import { cilInfo, cilLockLocked, cilKeyboard, cilAccountLogout } from '@coreui/i
 import CIcon from '@coreui/icons-react'
 import { NavLink } from 'react-router-dom'
 
-import avatar8 from '../../assets/images/avatars/8.jpg'
+import avatar8 from '../../assets/images/avatars/10.jpg'
 
 function AppHeaderDropdownAdmin() {
   return (

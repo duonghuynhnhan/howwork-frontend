@@ -4,6 +4,8 @@ import {
   AdminProjects,
   AdminTasks,
   AdminSummary,
+  AdminCreateUser,
+  AdminCreateAdmin,
 } from '../views'
 
 const adminRoutes = [
@@ -31,6 +33,18 @@ const adminRoutes = [
     exact: true,
     name: 'AdminSummary',
     element: AdminSummary,
+  },
+  {
+    path: '/admin/create-user',
+    exact: true,
+    name: 'AdminCreateUser',
+    element: AdminCreateUser,
+  },
+  {
+    path: '/admin/create-admin',
+    exact: true,
+    name: 'AdminCreateAdmin',
+    element: AdminCreateAdmin,
   },
 ]
 
