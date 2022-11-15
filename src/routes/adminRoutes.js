@@ -6,6 +6,9 @@ import {
   AdminSummary,
   AdminCreateUser,
   AdminCreateAdmin,
+  AdminInformation,
+  AdminChangePassword,
+  AdminChangeKey,
 } from '../views'
 
 const adminRoutes = [
@@ -45,6 +48,24 @@ const adminRoutes = [
     exact: true,
     name: 'AdminCreateAdmin',
     element: AdminCreateAdmin,
+  },
+  {
+    path: '/admin/information',
+    exact: true,
+    name: 'AdminInformation',
+    element: AdminInformation,
+  },
+  {
+    path: '/admin/change-password',
+    exact: true,
+    name: 'AdminChangePassword',
+    element: AdminChangePassword,
+  },
+  {
+    path: '/admin/change-key',
+    exact: true,
+    name: 'AdminChangeKey',
+    element: AdminChangeKey,
   },
 ]
 

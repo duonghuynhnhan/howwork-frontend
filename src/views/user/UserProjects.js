@@ -17,7 +17,7 @@ import {
 
 function UserProjects() {
   useEffect(() => {
-    document.title = 'Kevin Duong | Projects'
+    document.title = 'Projects | Howwork'
   })
 
   const projects = [

@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import {
   CContainer,
   CHeader,
-  CHeaderBrand,
   CHeaderNav,
   CHeaderToggler,
   CNavLink,
@@ -15,7 +14,6 @@ import CIcon from '@coreui/icons-react'
 import { cilBell, cilMenu, cilSearch } from '@coreui/icons'
 
 import AppHeaderDropdownAdmin from './AppHeaderDropdownAdmin'
-import { logo } from '../../assets/brand/logo'
 
 function AppHeaderAdmin() {
   const dispatch = useDispatch()
@@ -39,9 +37,6 @@ function AppHeaderAdmin() {
           />
           <CIcon icon={cilSearch} style={{ marginLeft: '-40px', marginTop: '9px' }} height={20} />
         </div>
-        <CHeaderBrand className="mx-auto d-md-none" to="/">
-          <CIcon icon={logo} height={48} alt="Logo" />
-        </CHeaderBrand>
         <CHeaderNav className="d-none d-md-flex me-auto"></CHeaderNav>
         <CHeaderNav>
           <CNavItem>

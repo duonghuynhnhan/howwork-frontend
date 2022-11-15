@@ -10,43 +10,43 @@ import { AppSidebarNav } from './AppSidebarNav'
 import { logoNegative } from 'src/assets/brand/logo-negative'
 import { sygnet } from 'src/assets/brand/sygnet'
 
-const navigation = [
-  {
-    component: CNavItem,
-    name: 'Home',
-    to: '/admin/home',
-    icon: <CIcon icon={cilHouse} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Project',
-    to: '/admin/projects',
-    icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Create User',
-    to: '/admin/create-user',
-    icon: <CIcon icon={cilUserFollow} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Create Admin',
-    to: '/admin/create-admin',
-    icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-  },
-  {
-    component: CNavItem,
-    name: 'Summary',
-    to: '/admin/summary',
-    icon: <CIcon icon={cilChart} customClassName="nav-icon" />,
-  },
-]
-
 function AppSidebarAdmin() {
   const dispatch = useDispatch()
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
+
+  const navigation = [
+    {
+      component: CNavItem,
+      name: 'Home',
+      to: '/admin/home',
+      icon: <CIcon icon={cilHouse} customClassName="nav-icon" />,
+    },
+    {
+      component: CNavItem,
+      name: 'Project',
+      to: '/admin/projects',
+      icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
+    },
+    {
+      component: CNavItem,
+      name: 'Create User',
+      to: '/admin/create-user',
+      icon: <CIcon icon={cilUserFollow} customClassName="nav-icon" />,
+    },
+    {
+      component: CNavItem,
+      name: 'Create Admin',
+      to: '/admin/create-admin',
+      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+    },
+    {
+      component: CNavItem,
+      name: 'Summary',
+      to: '/admin/summary',
+      icon: <CIcon icon={cilChart} customClassName="nav-icon" />,
+    },
+  ]
 
   return (
     <CSidebar

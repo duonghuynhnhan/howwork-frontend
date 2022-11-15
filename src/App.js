@@ -23,7 +23,7 @@ function App() {
     <Router>
       <Suspense fallback={loading}>
         <Routes>
-          <Route exact path="/account/login" name="Login Page" element={<Login />} />
+          <Route exact path="/account/login" name="Login Page" element={<Login props={type} />} />
           <Route
             exact
             path="/account/forgot-password"

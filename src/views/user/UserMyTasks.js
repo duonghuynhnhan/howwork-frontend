@@ -4,7 +4,7 @@ import { CCard, CCardBody, CCardTitle, CCardText, CButton, CNavLink } from '@cor
 
 function UserMyTasks() {
   useEffect(() => {
-    document.title = 'Kevin Duong | My Task'
+    document.title = 'My Tasks | Howwork'
   })
 
   const tasks = [

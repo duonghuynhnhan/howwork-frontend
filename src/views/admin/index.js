@@ -5,6 +5,9 @@ import AdminTasks from './AdminTasks'
 import AdminSummary from './AdminSummary'
 import AdminCreateUser from './AdminCreateUser'
 import AdminCreateAdmin from './AdminCreateAdmin'
+import AdminInformation from './AdminInformation'
+import AdminChangePassword from './AdminChangePassword'
+import AdminChangeKey from './AdminChangeKey'
 
 export {
   AdminHomePage,
@@ -14,4 +17,7 @@ export {
   AdminSummary,
   AdminCreateUser,
   AdminCreateAdmin,
+  AdminInformation,
+  AdminChangePassword,
+  AdminChangeKey,
 }

@@ -14,9 +14,9 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilAsteriskCircle, cilUser, cilPhone, cilBank } from '@coreui/icons'
 
-function AdminCreateUser() {
+function AdminInformation() {
   useEffect(() => {
-    document.title = 'Create User | Howwork'
+    document.title = 'Information | Howwork'
   })
 
   return (
@@ -30,13 +30,11 @@ function AdminCreateUser() {
             <CCard className="mx-4">
               <CCardBody className="p-4">
                 <CForm>
-                  <h1>Create new User</h1>
-                  <p className="text-medium-emphasis">Create new user account</p>
+                  <h1>Personal Information</h1>
+                  <p className="text-medium-emphasis">Change your information</p>
                   <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon icon={cilUser} />
-                    </CInputGroupText>
-                    <CFormInput placeholder="ID and Username" autoComplete="ID" />
+                    <p className="text-medium-emphasis">Avatar:</p>
+                    <input type={'file'}></input>
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
@@ -79,4 +77,4 @@ function AdminCreateUser() {
   )
 }
 
-export default AdminCreateUser
+export default AdminInformation

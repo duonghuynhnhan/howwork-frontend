@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate, NavLink } from 'react-router-dom'
 import {
   CButton,
@@ -15,9 +15,9 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
-import { useEffect } from 'react'
+import PropTypes from 'prop-types'
 
-function Login() {
+function Login({ props }) {
   useEffect(() => {
     document.title = 'Login | Howwork'
   }, [])
@@ -25,7 +25,7 @@ function Login() {
   const navigate = useNavigate()
 
   const handleSubmit = () => {
-    navigate('/admin/home')
+    navigate(`/${props}/home`)
   }
 
   return (
@@ -37,7 +37,7 @@ function Login() {
               <CCardBody>
                 <CForm>
                   <h1>Login</h1>
-                  <p className="text-medium-emphasis">Sign In to your account</p>
+                  <p className="text-medium-emphasis">Login to your account</p>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
@@ -76,6 +76,10 @@ function Login() {
       </CContainer>
     </div>
   )
+}
+
+Login.propTypes = {
+  props: PropTypes.string,
 }
 
 export default Login

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   CButton,
   CCard,
@@ -15,6 +15,10 @@ import CIcon from '@coreui/icons-react'
 import { cilAsteriskCircle, cilUser, cilPhone, cilBank } from '@coreui/icons'
 
 function AdminCreateAdmin() {
+  useEffect(() => {
+    document.title = 'Create Admin | Howwork'
+  })
+
   return (
     <div
       className="bg-light d-flex flex-row align-items-center"

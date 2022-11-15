@@ -1,4 +1,13 @@
-import { UserHomePage, UserNotifications, UserMyTasks, UserProjects, UserSummary } from '../views'
+import {
+  UserHomePage,
+  UserNotifications,
+  UserMyTasks,
+  UserProjects,
+  UserSummary,
+  UserInformation,
+  UserChangePassword,
+  UserChangeKey,
+} from '../views'
 
 const userRoutes = [
   { path: '/user/home', exact: true, name: 'UserHomepage', element: UserHomePage },
@@ -25,6 +34,24 @@ const userRoutes = [
     exact: true,
     name: 'UserSummary',
     element: UserSummary,
+  },
+  {
+    path: '/user/information',
+    exact: true,
+    name: 'UserInformation',
+    element: UserInformation,
+  },
+  {
+    path: '/user/change-password',
+    exact: true,
+    name: 'UserChangePassword',
+    element: UserChangePassword,
+  },
+  {
+    path: '/user/change-key',
+    exact: true,
+    name: 'UserChangeKey',
+    element: UserChangeKey,
   },
 ]
 

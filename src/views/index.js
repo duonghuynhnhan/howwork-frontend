@@ -8,8 +8,20 @@ import {
   AdminTasks,
   AdminCreateUser,
   AdminCreateAdmin,
+  AdminInformation,
+  AdminChangeKey,
+  AdminChangePassword,
 } from './admin'
-import { UserHomePage, UserNotifications, UserMyTasks, UserProjects, UserSummary } from './user'
+import {
+  UserHomePage,
+  UserNotifications,
+  UserMyTasks,
+  UserProjects,
+  UserSummary,
+  UserInformation,
+  UserChangePassword,
+  UserChangeKey,
+} from './user'
 
 export {
   Home,
@@ -22,9 +34,15 @@ export {
   AdminTasks,
   AdminCreateUser,
   AdminCreateAdmin,
+  AdminInformation,
+  AdminChangeKey,
+  AdminChangePassword,
   UserHomePage,
   UserNotifications,
   UserMyTasks,
   UserProjects,
   UserSummary,
+  UserInformation,
+  UserChangePassword,
+  UserChangeKey,
 }

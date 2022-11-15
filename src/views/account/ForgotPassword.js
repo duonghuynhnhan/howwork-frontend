@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
   CButton,
   CCard,
@@ -13,7 +13,6 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
-import { useEffect } from 'react'
 
 function ForgotPassword() {
   useEffect(() => {
