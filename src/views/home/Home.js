@@ -6,7 +6,7 @@ import home from '../../assets/images/avatars/home.png'
 
 function Home() {
   useEffect(() => {
-    document.title = 'Howwork'
+    document.title = 'Howwork | Home'
   })
 
   return (
