@@ -5,6 +5,7 @@ import {
   UserProjects,
   UserSummary,
   UserInformation,
+  UserChangeInformation,
   UserChangePassword,
   UserChangeKey,
   UserTasksDetail,
@@ -42,6 +43,12 @@ const userRoutes = [
     exact: true,
     name: 'UserInformation',
     element: UserInformation,
+  },
+  {
+    path: '/user/change-information',
+    exact: true,
+    name: 'UserChangeInformation',
+    element: UserChangeInformation,
   },
   {
     path: '/user/change-password',

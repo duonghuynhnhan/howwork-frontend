@@ -4,6 +4,7 @@ import UserNotifications from './UserNotifications'
 import UserProjects from './UserProjects'
 import UserSummary from './UserSummary'
 import UserInformation from './UserInformation'
+import UserChangeInformation from './UserChangeInformation'
 import UserChangePassword from './UserChangePassword'
 import UserChangeKey from './UserChangeKey'
 import UserTasksDetail from './UserTasksDetail'
@@ -16,6 +17,7 @@ export {
   UserProjects,
   UserSummary,
   UserInformation,
+  UserChangeInformation,
   UserChangePassword,
   UserChangeKey,
   UserTasksDetail,

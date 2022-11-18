@@ -16,9 +16,9 @@ import {
 import CIcon from '@coreui/icons-react'
 import { cilAsteriskCircle, cilUser, cilPhone, cilBank } from '@coreui/icons'
 
-function UserInformation() {
+function UserChangeInformation() {
   useEffect(() => {
-    document.title = 'Information | Howwork'
+    document.title = 'Change Information | Howwork'
   })
 
   return (
@@ -32,7 +32,7 @@ function UserInformation() {
             <CCard className="mx-4">
               <CCardBody className="p-4">
                 <CForm>
-                  <h1>Personal Information</h1>
+                  <h1>Change Your Personal Information</h1>
                   <p className="text-medium-emphasis">Change your information</p>
                   <CInputGroup className="mb-3">
                     <p className="text-medium-emphasis">Avatar:</p>
@@ -42,34 +42,42 @@ function UserInformation() {
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Full name" autoComplete="fullname" />
+                    <CFormInput
+                      placeholder="Full name"
+                      autoComplete="fullname"
+                      value={'Kevin Duong'}
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>@</CInputGroupText>
-                    <CFormInput placeholder="Email" autoComplete="email" />
+                    <CFormInput
+                      placeholder="Email"
+                      autoComplete="email"
+                      value={'duonghuynhnhan@outlook.com'}
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilPhone} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Phone" autoComplete="phone" />
+                    <CFormInput placeholder="Phone" autoComplete="phone" value={'0354984001'} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilAsteriskCircle} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Position" autoComplete="position" />
+                    <CFormInput placeholder="Position" autoComplete="position" value={'Student'} />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilBank} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Unit" autoComplete="unit" />
+                    <CFormInput placeholder="Unit" autoComplete="unit" value={'CIT'} />
                   </CInputGroup>
                   <div className="d-grid">
-                    <CButton>
-                      <CNavLink to="/user/change-information" component={NavLink}>
-                        Change Your Information
+                    <CButton color="success">
+                      <CNavLink to="/user/information" component={NavLink}>
+                        Confirm
                       </CNavLink>
                     </CButton>
                   </div>
@@ -83,4 +91,4 @@ function UserInformation() {
   )
 }
 
-export default UserInformation
+export default UserChangeInformation
