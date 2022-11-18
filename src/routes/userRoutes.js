@@ -1,12 +1,14 @@
 import {
   UserHomePage,
   UserNotifications,
-  UserMyTasks,
+  UserTasks,
   UserProjects,
   UserSummary,
   UserInformation,
   UserChangePassword,
   UserChangeKey,
+  UserTasksDetail,
+  UserProjectsDetail,
 } from '../views'
 
 const userRoutes = [
@@ -18,10 +20,10 @@ const userRoutes = [
     element: UserNotifications,
   },
   {
-    path: '/user/my-tasks',
+    path: '/user/tasks',
     exact: true,
-    name: 'UserMyTasks',
-    element: UserMyTasks,
+    name: 'UserTasks',
+    element: UserTasks,
   },
   {
     path: '/user/projects',
@@ -52,6 +54,18 @@ const userRoutes = [
     exact: true,
     name: 'UserChangeKey',
     element: UserChangeKey,
+  },
+  {
+    path: '/user/projects/:id/tasks/:id',
+    exact: true,
+    name: 'UserTasksDetail',
+    element: UserTasksDetail,
+  },
+  {
+    path: '/user/projects/:id',
+    exact: true,
+    name: 'UserProjectsDetail',
+    element: UserProjectsDetail,
   },
 ]
 

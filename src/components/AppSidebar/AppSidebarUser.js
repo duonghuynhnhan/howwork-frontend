@@ -24,8 +24,8 @@ function AppSidebarUser() {
     },
     {
       component: CNavItem,
-      name: 'My Tasks',
-      to: '/user/my-tasks',
+      name: 'Tasks',
+      to: '/user/tasks',
       icon: <CIcon icon={cilBolt} customClassName="nav-icon" />,
     },
     {

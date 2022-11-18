@@ -15,12 +15,14 @@ import {
 import {
   UserHomePage,
   UserNotifications,
-  UserMyTasks,
+  UserTasks,
   UserProjects,
   UserSummary,
   UserInformation,
   UserChangePassword,
   UserChangeKey,
+  UserTasksDetail,
+  UserProjectsDetail,
 } from './user'
 
 export {
@@ -39,10 +41,12 @@ export {
   AdminChangePassword,
   UserHomePage,
   UserNotifications,
-  UserMyTasks,
+  UserTasks,
   UserProjects,
   UserSummary,
   UserInformation,
   UserChangePassword,
   UserChangeKey,
+  UserTasksDetail,
+  UserProjectsDetail,
 }

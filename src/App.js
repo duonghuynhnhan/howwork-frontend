@@ -16,7 +16,7 @@ function App() {
     document.title = 'Howwork'
   })
 
-  const type = 'admin'
+  const type = 'user'
   const Layout = type === 'admin' ? LayoutAdmin : LayoutUser
 
   return (

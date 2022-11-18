@@ -1,10 +1,19 @@
 import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
-import { CCard, CCardBody, CCardTitle, CCardText, CButton, CNavLink } from '@coreui/react'
+import {
+  CCard,
+  CCardBody,
+  CCol,
+  CRow,
+  CCardTitle,
+  CCardText,
+  CButton,
+  CNavLink,
+} from '@coreui/react'
 
-function UserMyTasks() {
+function UserProjectsDetail() {
   useEffect(() => {
-    document.title = 'My Tasks | Howwork'
+    document.title = "Project's Detail | Howwork"
   })
 
   const tasks = [
@@ -16,9 +25,13 @@ function UserMyTasks() {
     <>
       <CCard className="mb-4">
         <CCardBody>
-          <h4 id="traffic" className="card-title mb-0">
-            My Tasks
-          </h4>
+          <CRow>
+            <CCol sm={5}>
+              <h4 id="traffic" className="card-title mb-0">
+                Projects Name
+              </h4>
+            </CCol>
+          </CRow>
 
           <br></br>
 
@@ -28,7 +41,7 @@ function UserMyTasks() {
                 <CCardTitle>{task.title}</CCardTitle>
                 <CCardText>{task.description}</CCardText>
                 <CButton>
-                  <CNavLink to="/user/task" component={NavLink}>
+                  <CNavLink to={`/user/projects/${index}/tasks/${index}`} component={NavLink}>
                     Click to view
                   </CNavLink>
                 </CButton>
@@ -41,4 +54,4 @@ function UserMyTasks() {
   )
 }
 
-export default UserMyTasks
+export default UserProjectsDetail

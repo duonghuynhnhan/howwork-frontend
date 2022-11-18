@@ -1,8 +1,5 @@
 import React, { useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
 import {
-  CButton,
-  CButtonGroup,
   CCard,
   CCardBody,
   CCol,
@@ -13,12 +10,11 @@ import {
   CTableRow,
   CTableBody,
   CTableDataCell,
-  CNavLink,
 } from '@coreui/react'
 
-function UserProjects() {
+function UserTasksDetail() {
   useEffect(() => {
-    document.title = 'Projects | Howwork'
+    document.title = "Task's Detail | Howwork"
   })
 
   const projects = [
@@ -47,22 +43,8 @@ function UserProjects() {
           <CRow>
             <CCol sm={5}>
               <h4 id="traffic" className="card-title mb-0">
-                Projects
+                Task Name
               </h4>
-            </CCol>
-            <CCol sm={7} className="d-none d-md-block">
-              <CButtonGroup className="float-end me-3">
-                {['Late', 'Present', 'Pending'].map((value) => (
-                  <CButton
-                    color="outline-secondary"
-                    key={value}
-                    className="mx-0"
-                    active={value === 'Present'}
-                  >
-                    {value}
-                  </CButton>
-                ))}
-              </CButtonGroup>
             </CCol>
           </CRow>
 
@@ -77,7 +59,6 @@ function UserProjects() {
                 <CTableHeaderCell scope="col">Time to start</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Deadline</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Time to done</CTableHeaderCell>
-                <CTableHeaderCell scope="col" style={{ width: '150px' }}></CTableHeaderCell>
               </CTableRow>
             </CTableHead>
             <CTableBody>
@@ -89,13 +70,6 @@ function UserProjects() {
                   <CTableDataCell>{project.timeToStart}</CTableDataCell>
                   <CTableDataCell>{project.deadline}</CTableDataCell>
                   <CTableDataCell>{project.timeToDone}</CTableDataCell>
-                  <CTableDataCell>
-                    <CButton>
-                      <CNavLink to={`/user/projects/${index}`} component={NavLink}>
-                        Click to view
-                      </CNavLink>
-                    </CButton>
-                  </CTableDataCell>
                 </CTableRow>
               ))}
             </CTableBody>
@@ -106,4 +80,4 @@ function UserProjects() {
   )
 }
 
-export default UserProjects
+export default UserTasksDetail
