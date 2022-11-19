@@ -35,36 +35,64 @@ function UserInformation() {
                   <h1>Personal Information</h1>
                   <p className="text-medium-emphasis">Change your information</p>
                   <CInputGroup className="mb-3">
-                    <p className="text-medium-emphasis">Avatar:</p>
-                    <input type={'file'}></input>
+                    <CInputGroupText>
+                      <CIcon icon={cilUser} />
+                    </CInputGroupText>
+                    <CFormInput placeholder="ID" autoComplete="id" value={'B1910676'} disabled />
                   </CInputGroup>
+
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Full name" autoComplete="fullname" />
+                    <CFormInput
+                      placeholder="Full name"
+                      autoComplete="fullname"
+                      value={'Kevin Duong'}
+                      disabled
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>@</CInputGroupText>
-                    <CFormInput placeholder="Email" autoComplete="email" />
+                    <CFormInput
+                      placeholder="Email"
+                      autoComplete="email"
+                      value={'duonghuynhnhan@outlook.com'}
+                      disabled
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilPhone} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Phone" autoComplete="phone" />
+                    <CFormInput
+                      placeholder="Phone"
+                      autoComplete="phone"
+                      value={'0354984001'}
+                      disabled
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilAsteriskCircle} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Position" autoComplete="position" />
+                    <CFormInput
+                      placeholder="Position"
+                      autoComplete="position"
+                      value={'Student'}
+                      disabled
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilBank} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Unit" autoComplete="unit" />
+                    <CFormInput
+                      placeholder="Unit"
+                      autoComplete="unit"
+                      value={'College of Information Technology'}
+                      disabled
+                    />
                   </CInputGroup>
                   <div className="d-grid">
                     <CButton>
