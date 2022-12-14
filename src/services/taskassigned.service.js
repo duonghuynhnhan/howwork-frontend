@@ -1,40 +1,52 @@
-const knex = require('../database/knex')
+import axios from 'axios'
+
+const url = 'http://localhost:3100'
 
 class TaskAssignedService {
-    constructor() {
-        this.taskassigneds = knex('taskassigned')
-    }
+  constructor() {
+    this.api = axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+  }
 
-    #getTaskAssigned(payload) {
-        const taskAssigned = { ...payload }
-        const taskAssignedProperties = [
-            'id',
-            'task',
-            'user',
-        ]
+  //   async all() {
+  //     return (await this.api.get(`${url}/api/projects`)).data
+  //   }
 
-        Object.keys(taskAssigned).forEach(function (key) {
-            if (taskAssignedProperties.indexOf(key) == -1) {
-                delete taskAssigned[key]
-            }
-        })
+  async detail(username) {
+    return (await this.api.get(`${url}/api/project/${username}`)).data
+  }
 
-        return taskAssigned
-    }
+  async create(payload) {
+    return (await this.api.post(`${url}/api/task/assigned`, payload)).data
+  }
 
-    async all(username) {
-        return await this.taskassigneds.where('user', username).select('task')
-    }
+  //   async getMany() {
+  //     return (await this.api.get(this.baseUrl)).data
+  //   }
 
-    // async create(payload) {
-    //     const job = this.#getProjectAssigned(payload)
-    //     const [id] = await this.jobs.insert(job)
-    //     return { id, ...job }
-    // }
+  //   async create(payload) {
+  //     return (await this.api.post(`${url}/api/project/assigned`, payload)).data
+  //   }
 
-    // async findById(id) {
-    //     return await this.jobs.where('id', id).select('*').first()
-    // }
+  //   async deleteMany() {
+  //     return (await this.api.delete(this.baseUrl)).data
+  //   }
+
+  //   async get(id) {
+  //     return (await this.api.get(`${this.baseUrl}/${id}`)).data
+  //   }
+
+  //   async update(id, admin) {
+  //     return (await this.api.put(`${this.baseUrl}/${id}`, admin)).data
+  //   }
+
+  //   async delete(id) {
+  //     return (await this.api.delete(`${this.baseUrl}/${id}`)).data
+  //   }
 }
 
-module.exports = TaskAssignedService
+export const taskAssignedService = new TaskAssignedService()

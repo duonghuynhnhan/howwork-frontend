@@ -20,12 +20,12 @@ class TaskService {
     return (await this.api.get(`${url}/api/task/${task_id}`)).data
   }
 
+  async create(payload) {
+    return (await this.api.post(`${url}/api/task`, payload)).data
+  }
+
   //   async getMany() {
   //     return (await this.api.get(this.baseUrl)).data
-  //   }
-
-  //   async create(admin) {
-  //     return (await this.api.post(this.baseUrl, admin)).data
   //   }
 
   //   async deleteMany() {

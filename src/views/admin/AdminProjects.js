@@ -100,6 +100,18 @@ function AdminProjects() {
     return day + '/' + month + '/' + year + ' ' + hours + ':' + minutes + ':' + seconds
   }
 
+  const clear = () => {
+    setVisible(false)
+    setName('')
+    setDescription('')
+    setStartDate(new Date())
+    setEndDate(new Date())
+    setTime()
+    setCompletedDate(new Date())
+    setNote('')
+    setSelected([])
+  }
+
   const handleCreate = async () => {
     const payload = {
       name,
@@ -122,16 +134,8 @@ function AdminProjects() {
     })
 
     if (create) {
-      setVisible(false)
+      clear()
       setNoti(true)
-      setName('')
-      setDescription('')
-      setStartDate(new Date())
-      setEndDate(new Date())
-      setTime()
-      setCompletedDate(new Date())
-      setNote('')
-      setSelected([])
     }
   }
 
@@ -160,7 +164,7 @@ function AdminProjects() {
                         value === 'Completed'
                           ? 'aqua'
                           : value === 'Present'
-                          ? 'indianred'
+                          ? 'lightcoral'
                           : 'gainsboro',
                     }}
                   >
@@ -176,6 +180,7 @@ function AdminProjects() {
           <CTable align="middle" className="mb-0 border" hover responsive>
             <CTableHead color="light">
               <CTableRow>
+                <CTableHeaderCell scope="col">#</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Name</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Leader</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Created Date</CTableHeaderCell>
@@ -187,7 +192,7 @@ function AdminProjects() {
               </CTableRow>
             </CTableHead>
             <CTableBody>
-              {projects.map((project) => (
+              {projects.map((project, index) => (
                 <CTableRow
                   key={project.id}
                   onClick={() => {
@@ -200,12 +205,13 @@ function AdminProjects() {
                         ? 'aqua'
                         : convertToDate(project.end) > new Date() &&
                           convertToDate(project.start) < new Date()
-                        ? 'indianred'
+                        ? 'lightcoral'
                         : 'gainsboro',
                   }}
                 >
+                  <CTableDataCell>{index + 1}</CTableDataCell>
                   <CTableDataCell>{project.name}</CTableDataCell>
-                  <CTableDataCell>{project.fullname}</CTableDataCell>
+                  <CTableDataCell>{project.fullname + ' ' + project.leader}</CTableDataCell>
                   <CTableDataCell>{project.createddate}</CTableDataCell>
                   <CTableDataCell>{project.completeddate}</CTableDataCell>
                   <CTableDataCell>{project.start}</CTableDataCell>
@@ -220,8 +226,19 @@ function AdminProjects() {
       </CCard>
 
       <>
-        <CModal visible={visible} onClose={() => setVisible(false)}>
-          <CModalHeader onClose={() => setVisible(false)}>
+        <CModal
+          visible={visible}
+          onClose={() => {
+            clear()
+            setVisible(false)
+          }}
+        >
+          <CModalHeader
+            onClose={() => {
+              clear()
+              setVisible(false)
+            }}
+          >
             <CModalTitle>Add project</CModalTitle>
           </CModalHeader>
           <CModalBody>
@@ -335,7 +352,13 @@ function AdminProjects() {
             </CForm>
           </CModalBody>
           <CModalFooter>
-            <CButton color="secondary" onClick={() => setVisible(false)}>
+            <CButton
+              color="secondary"
+              onClick={() => {
+                clear()
+                setVisible(false)
+              }}
+            >
               Close
             </CButton>
             <CButton color="primary" onClick={handleCreate}>

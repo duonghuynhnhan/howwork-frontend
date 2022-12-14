@@ -10,12 +10,43 @@ import {
   CCardText,
   CButton,
   CFormInput,
+  CModalHeader,
+  CModal,
+  CModalTitle,
+  CModalBody,
+  CModalFooter,
+  CForm,
+  CInputGroup,
+  CInputGroupText,
+  CFormSelect,
+  CButtonGroup,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilPlus, cilPencil, cilDelete } from '@coreui/icons'
-import moment from 'moment'
+import {
+  cilPlus,
+  cilPencil,
+  cilDelete,
+  cilTags,
+  cilText,
+  cilListFilter,
+  cilDataTransferDown,
+  cilDataTransferUp,
+  cilHandPointUp,
+  cilNotes,
+  cilAvTimer,
+} from '@coreui/icons'
 
-import { projectService, taskService, projectCommentService } from 'src/services'
+import moment from 'moment'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
+
+import {
+  projectService,
+  projectCommentService,
+  projectAssignedService,
+  taskService,
+  taskAssignedService,
+} from 'src/services'
 
 function AdminProjectsDetail() {
   const project_id = useLocation().state
@@ -26,6 +57,26 @@ function AdminProjectsDetail() {
   const [tasks, setTasks] = useState([])
   const [comments, setComments] = useState([])
   const [comment, setComment] = useState('')
+  const [accounts, setAccounts] = useState([])
+  const [visible, setVisible] = useState(false)
+  const [noti, setNoti] = useState(false)
+
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [startDate, setStartDate] = useState(new Date())
+  const [endDate, setEndDate] = useState(new Date())
+  const [time, setTime] = useState()
+  const [completedDate, setCompletedDate] = useState(new Date())
+  const [account, setAccount] = useState()
+  const [note, setNote] = useState('')
+
+  let options = ['Open this select accounts']
+  for (var i = 0; i < accounts.length; i++) {
+    options.push({
+      label: accounts[i].fullname + ' ' + accounts[i].username,
+      value: accounts[i].username,
+    })
+  }
 
   useEffect(() => {
     document.title = `${project.name} | Howwork`
@@ -34,21 +85,46 @@ function AdminProjectsDetail() {
       setProject(project)
     })
 
-    taskService.all(project_id).then((task) => {
-      setTasks(task)
+    let interval1 = setInterval(() => {
+      taskService.all(project_id).then((task) => {
+        setTasks(task)
+      })
+    }, 200)
+
+    projectAssignedService.allMember(project_id).then((account) => {
+      setAccounts(account)
     })
 
-    let interval = setInterval(() => {
+    let interval2 = setInterval(() => {
       projectCommentService.all(project_id).then((comment) => {
         setComments(comment)
       })
-      console.log('ok')
     }, 200)
 
     return () => {
-      clearInterval(interval)
+      clearInterval(interval1)
+      clearInterval(interval2)
     }
   }, [project_id, project.name, comment])
+
+  const convertToDate = (string) => {
+    const [dateValues, timeValues] = string.split(' ')
+    const [day, month, year] = dateValues.split('/')
+    const [hours, minutes, seconds] = timeValues.split(':')
+
+    return new Date(+year, +month - 1, +day, +hours, +minutes, +seconds)
+  }
+
+  const convertToString = (date) => {
+    const day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+    const month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+    const year = date.getFullYear()
+    const hours = date.getHours() < 10 ? '0' + date.getHours() : date.getHours()
+    const minutes = date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()
+    const seconds = date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds()
+
+    return day + '/' + month + '/' + year + ' ' + hours + ':' + minutes + ':' + seconds
+  }
 
   const handleAddComment = async () => {
     const payload = {
@@ -64,6 +140,42 @@ function AdminProjectsDetail() {
     }
   }
 
+  const clear = () => {
+    setVisible(false)
+    setName('')
+    setDescription('')
+    setStartDate(new Date())
+    setEndDate(new Date())
+    setTime()
+    setCompletedDate(new Date())
+    setNote('')
+    setAccount()
+  }
+
+  const handleCreate = async () => {
+    const payload = {
+      name,
+      description,
+      memberof: project_id,
+      start: convertToString(startDate),
+      end: convertToString(endDate),
+      time,
+      createddate: moment().format('DD/MM/YYYY HH:mm:ss'),
+      completeddate: convertToString(completedDate),
+      updateddate: null,
+      completedstate: 0,
+      note,
+    }
+
+    const create = await taskService.create(payload)
+    const data = { task: create.id, user: account }
+    const assigned = await taskAssignedService.create(data)
+    if (create && assigned) {
+      setNoti(true)
+      clear()
+    }
+  }
+
   return (
     <>
       <CCard className="mb-4">
@@ -73,27 +185,69 @@ function AdminProjectsDetail() {
               <h4 id="traffic" className="card-title mb-0">
                 {project.name}
               </h4>
-              <CCardText>{project.description}</CCardText>
+              <CCardText style={{ color: 'coral' }}>
+                {'(FROM ' + project.start + ' TO ' + project.completeddate + ')'}
+              </CCardText>
+              <CCardText style={{ marginTop: '-10px' }}>{project.description}</CCardText>
+              <CCardText style={{ marginTop: '-20px', color: 'red' }}>
+                {'(DEADLINE ' + project.end + ')'}
+              </CCardText>
             </CCol>
-            {username === project.leader && (
-              <>
-                <CCol sm={7} className="d-none d-md-block">
-                  <CButton color="primary" className="float-end">
+            <CCol sm={7} className="d-none d-md-block">
+              {username === project.leader && (
+                <>
+                  <CButton
+                    color="primary"
+                    className="float-end"
+                    onClick={() => {
+                      setVisible(true)
+                    }}
+                  >
                     <CIcon icon={cilPlus} />
                   </CButton>
                   <CButton color="secondary" className="float-end">
                     <CIcon icon={cilPencil} />
                   </CButton>
-                </CCol>
-              </>
-            )}
+                  <CButtonGroup className="float-end me-3">
+                    {['Completed', 'Present', 'Pending'].map((value) => (
+                      <CButton
+                        color="outline-secondary"
+                        key={value}
+                        className="mx-0"
+                        style={{
+                          background:
+                            value === 'Completed'
+                              ? 'aqua'
+                              : value === 'Present'
+                              ? 'lightcoral'
+                              : 'gainsboro',
+                        }}
+                      >
+                        {value}
+                      </CButton>
+                    ))}
+                  </CButtonGroup>
+                </>
+              )}
+            </CCol>
+            <hr></hr>
+            <CCardText>{}</CCardText>
           </CRow>
 
           <br></br>
 
           {tasks.map((task) => (
             <CCard
-              style={{ width: '99%', margin: '5px' }}
+              style={{
+                width: '99%',
+                margin: '5px',
+                background:
+                  convertToDate(task.end) < new Date() && convertToDate(task.start) < new Date()
+                    ? 'aqua'
+                    : convertToDate(task.end) > new Date() && convertToDate(task.start) < new Date()
+                    ? 'lightcoral'
+                    : 'gainsboro',
+              }}
               key={task.id}
               onClick={() => {
                 navigate(`/admin/project/${project_id}/task/${task.id}`, {
@@ -170,6 +324,165 @@ function AdminProjectsDetail() {
             />
           </CCardBody>
         </CCard>
+      </>
+
+      <>
+        <CModal
+          visible={visible}
+          onClose={() => {
+            clear()
+            setVisible(false)
+          }}
+        >
+          <CModalHeader
+            onClose={() => {
+              clear()
+              setVisible(false)
+            }}
+          >
+            <CModalTitle>Add task</CModalTitle>
+          </CModalHeader>
+          <CModalBody>
+            <CForm>
+              <p className="text-medium-emphasis">Input some information to create a new task</p>
+              <CInputGroup className="mb-3">
+                <CInputGroupText>
+                  <CIcon icon={cilText} />
+                </CInputGroupText>
+                <CFormInput
+                  placeholder="Task name"
+                  autoComplete="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </CInputGroup>
+              <CInputGroup className="mb-3">
+                <CInputGroupText>
+                  <CIcon icon={cilListFilter} />
+                </CInputGroupText>
+                <CFormInput
+                  placeholder="Discription"
+                  autoComplete="discription"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </CInputGroup>
+              <CInputGroup className="mb-3">
+                <CInputGroupText>
+                  <CIcon icon={cilDataTransferDown} />
+                </CInputGroupText>
+                <div>
+                  <DatePicker
+                    selected={startDate}
+                    minDate={new Date()}
+                    onChange={(date) => {
+                      setStartDate(date)
+                    }}
+                    placeholderText="Start Date"
+                    dateFormat="dd/MM/yyyy HH:mm:ss"
+                    showTimeSelect
+                    timeFormat="HH:mm:ss"
+                  />
+                </div>
+              </CInputGroup>
+              <CInputGroup className="mb-3">
+                <CInputGroupText>
+                  <CIcon icon={cilDataTransferUp} />
+                </CInputGroupText>
+                <div>
+                  <DatePicker
+                    selected={endDate}
+                    minDate={startDate}
+                    placeholderText="End Date"
+                    onChange={(date) => setEndDate(date)}
+                    dateFormat="dd/MM/yyyy HH:mm:ss"
+                    showTimeSelect
+                    timeFormat="HH:mm:ss"
+                  />
+                </div>
+              </CInputGroup>
+              <CInputGroup className="mb-3">
+                <CInputGroupText>
+                  <CIcon icon={cilAvTimer} />
+                </CInputGroupText>
+                <CFormInput
+                  placeholder="Time"
+                  autoComplete="time"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
+                />
+              </CInputGroup>
+              <CInputGroup className="mb-3">
+                <CInputGroupText>
+                  <CIcon icon={cilHandPointUp} />
+                </CInputGroupText>
+                <div>
+                  <DatePicker
+                    selected={completedDate}
+                    minDate={endDate}
+                    onChange={(date) => setCompletedDate(date)}
+                    placeholderText="Completed Date"
+                    dateFormat="dd/MM/yyyy HH:mm:ss"
+                    showTimeSelect
+                    timeFormat="HH:mm:ss"
+                  />
+                </div>
+              </CInputGroup>
+              <CInputGroup className="mb-3">
+                <CInputGroupText>
+                  <CIcon icon={cilNotes} />
+                </CInputGroupText>
+                <CFormInput
+                  placeholder="Note"
+                  autoComplete="note"
+                  value={note}
+                  onChange={(e) => setNote(e.target.value)}
+                />
+              </CInputGroup>
+              <CInputGroup className="mb-3">
+                <CInputGroupText>
+                  <CIcon icon={cilTags} />
+                </CInputGroupText>
+                <CFormSelect
+                  options={options}
+                  value={account}
+                  onChange={(e) => setAccount(e.target.value)}
+                />
+              </CInputGroup>
+            </CForm>
+          </CModalBody>
+          <CModalFooter>
+            <CButton
+              color="secondary"
+              onClick={() => {
+                clear()
+                setVisible(false)
+              }}
+            >
+              Close
+            </CButton>
+            <CButton color="primary" onClick={handleCreate}>
+              Create task
+            </CButton>
+          </CModalFooter>
+        </CModal>
+      </>
+
+      <>
+        <CModal visible={noti} onClose={() => setNoti(false)}>
+          <CModalHeader onClose={() => setNoti(false)}>
+            <CModalTitle>Notifications</CModalTitle>
+          </CModalHeader>
+          <CModalBody>Woohoo, task is created successfully!!!</CModalBody>
+          <CModalFooter>
+            <CButton color="secondary" onClick={() => setNoti(false)}>
+              Close
+            </CButton>
+            <CButton color="primary" onClick={() => setNoti(false)}>
+              OK
+            </CButton>
+          </CModalFooter>
+        </CModal>
       </>
     </>
   )

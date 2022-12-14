@@ -1,50 +1,28 @@
-const knex = require('../database/knex')
-const moment = require("moment")
+import axios from 'axios'
 
-class TaskComment {
-    constructor() {
-        this.taskcomments = knex('taskcomment')
-    }
+const url = 'http://localhost:3100'
 
-    #getTaskComment(payload) {
-        const taskcomment = { ...payload }
-        const taskcommentProperties = [
-            'id',
-            'task',
-            'comment',
-            'who',
-            'time',
-        ]
+class TaskCommentService {
+  constructor() {
+    this.api = axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+  }
 
-        Object.keys(taskcomment).forEach(function (key) {
-            if (taskcommentProperties.indexOf(key) == -1) {
-                delete taskcomment[key]
-            }
-        })
+  async all(task_id) {
+    return (await this.api.get(`${url}/api/task/comments/${task_id}`)).data
+  }
 
-        return taskcomment
-    }
+  async create(payload) {
+    return (await this.api.post(`${url}/api/task/comment`, payload)).data
+  }
 
-    async all(id) {
-        return await this.taskcomments.where('task', id).select('*')
-    }
-
-    async create(payload) {
-        const comment = this.#getTaskComment(payload)
-        comment.time = moment().format('DD/MM/YYYY HH:mm:ss')
-        const [id] = await this.taskcomments.insert(comment)
-        return { id, ...comment }
-    }
-
-    async update(id, payload) {
-        const update = this.#getTaskComment(payload)
-        update.time = moment().format('DD/MM/YYYY HH:mm:ss')
-        return await this.taskcomments.where('id', id).update(update)
-    }
-
-    async delete(id) {
-        return await this.taskcomments.where('id', id).del()
-    }
+  async delete(comment_id) {
+    return (await this.api.delete(`${url}/api/task/comment/${comment_id}`)).data
+  }
 }
 
-module.exports = TaskComment
+export const taskCommentService = new TaskCommentService()
