@@ -12,6 +12,7 @@ import CIcon from '@coreui/icons-react'
 import { NavLink } from 'react-router-dom'
 
 import avatar8 from '../../assets/images/avatars/10.jpg'
+import store from 'src/store'
 
 function AppHeaderDropdownAdmin() {
   return (
@@ -39,7 +40,13 @@ function AppHeaderDropdownAdmin() {
           </CNavLink>
         </CDropdownItem>
         <CDropdownItem style={{ display: 'flex' }}>
-          <CNavLink to="/" component={NavLink}>
+          <CNavLink
+            to="/"
+            component={NavLink}
+            onClick={() => {
+              store.dispatch({ type: 'set', username: null, role: null })
+            }}
+          >
             <CIcon icon={cilAccountLogout} className="me-2" />
             Logout
           </CNavLink>

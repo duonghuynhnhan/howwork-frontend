@@ -1,17 +1,8 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import {
-  CContainer,
-  CHeader,
-  CHeaderNav,
-  CHeaderToggler,
-  CNavLink,
-  CNavItem,
-  CFormInput,
-} from '@coreui/react'
+import { CContainer, CHeader, CHeaderNav, CHeaderToggler, CFormInput } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilBell, cilMenu, cilSearch } from '@coreui/icons'
+import { cilMenu, cilSearch } from '@coreui/icons'
 
 import AppHeaderDropdownAdmin from './AppHeaderDropdownAdmin'
 
@@ -38,13 +29,6 @@ function AppHeaderAdmin() {
           <CIcon icon={cilSearch} style={{ marginLeft: '-40px', marginTop: '9px' }} height={20} />
         </div>
         <CHeaderNav className="d-none d-md-flex me-auto"></CHeaderNav>
-        <CHeaderNav>
-          <CNavItem>
-            <CNavLink to="/admin/notifications" component={NavLink}>
-              <CIcon icon={cilBell} size="lg" />
-            </CNavLink>
-          </CNavItem>
-        </CHeaderNav>
         <CHeaderNav className="ms-3">
           <AppHeaderDropdownAdmin />
         </CHeaderNav>

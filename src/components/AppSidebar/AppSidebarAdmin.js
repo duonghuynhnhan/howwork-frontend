@@ -1,7 +1,14 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler, CNavItem } from '@coreui/react'
-import { cilHouse, cilNotes, cilChart, cilUserFollow, cilPeople } from '@coreui/icons'
+import {
+  CSidebar,
+  CSidebarBrand,
+  CSidebarNav,
+  CSidebarToggler,
+  CNavItem,
+  CNavGroup,
+} from '@coreui/react'
+import { cilHouse, cilNotes, cilChart, cilUserFollow, cilPeople, cilUser } from '@coreui/icons'
 import CIcon from '@coreui/icons-react'
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
@@ -29,17 +36,25 @@ function AppSidebarAdmin() {
       icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
     },
     {
-      component: CNavItem,
-      name: 'Create User',
-      to: '/admin/create-user',
-      icon: <CIcon icon={cilUserFollow} customClassName="nav-icon" />,
+      component: CNavGroup,
+      name: 'Create Account',
+      icon: <CIcon icon={cilUser} customClassName="nav-icon" />,
+      items: [
+        {
+          component: CNavItem,
+          name: 'Create User',
+          to: '/admin/create-user',
+          icon: <CIcon icon={cilUserFollow} customClassName="nav-icon" />,
+        },
+        {
+          component: CNavItem,
+          name: 'Create Admin',
+          to: '/admin/create-admin',
+          icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
+        },
+      ],
     },
-    {
-      component: CNavItem,
-      name: 'Create Admin',
-      to: '/admin/create-admin',
-      icon: <CIcon icon={cilPeople} customClassName="nav-icon" />,
-    },
+
     {
       component: CNavItem,
       name: 'Summary',

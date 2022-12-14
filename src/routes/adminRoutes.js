@@ -2,13 +2,14 @@ import {
   AdminHomePage,
   AdminNotifications,
   AdminProjects,
-  AdminTasks,
   AdminSummary,
   AdminCreateUser,
   AdminCreateAdmin,
   AdminInformation,
   AdminChangePassword,
   AdminChangeKey,
+  AdminProjectsDetail,
+  AdminTasksDetail,
 } from '../views'
 
 const adminRoutes = [
@@ -24,12 +25,6 @@ const adminRoutes = [
     exact: true,
     name: 'AdminProject',
     element: AdminProjects,
-  },
-  {
-    path: '/admin/tasks',
-    exact: true,
-    name: 'AdminTasks',
-    element: AdminTasks,
   },
   {
     path: '/admin/summary',
@@ -66,6 +61,18 @@ const adminRoutes = [
     exact: true,
     name: 'AdminChangeKey',
     element: AdminChangeKey,
+  },
+  {
+    path: '/admin/project/:id/task/:id',
+    exact: true,
+    name: 'AdminTasksDetail',
+    element: AdminTasksDetail,
+  },
+  {
+    path: '/admin/project/:id',
+    exact: true,
+    name: 'AdminProjectsDetail',
+    element: AdminProjectsDetail,
   },
 ]
 

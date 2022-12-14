@@ -91,7 +91,7 @@ function UserProjects() {
                   <CTableDataCell>{project.timeToDone}</CTableDataCell>
                   <CTableDataCell>
                     <CButton>
-                      <CNavLink to={`/user/projects/${index}`} component={NavLink}>
+                      <CNavLink to={`/user/project/${index}`} component={NavLink}>
                         Click to view
                       </CNavLink>
                     </CButton>

@@ -41,7 +41,7 @@ function UserProjectsDetail() {
                 <CCardTitle>{task.title}</CCardTitle>
                 <CCardText>{task.description}</CCardText>
                 <CButton>
-                  <CNavLink to={`/user/projects/${index}/tasks/${index}`} component={NavLink}>
+                  <CNavLink to={`/user/project/${index}/task/${index}`} component={NavLink}>
                     Click to view
                   </CNavLink>
                 </CButton>

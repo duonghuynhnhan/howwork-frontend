@@ -63,13 +63,13 @@ const userRoutes = [
     element: UserChangeKey,
   },
   {
-    path: '/user/projects/:id/tasks/:id',
+    path: '/user/project/:id/task/:id',
     exact: true,
     name: 'UserTasksDetail',
     element: UserTasksDetail,
   },
   {
-    path: '/user/projects/:id',
+    path: '/user/project/:id',
     exact: true,
     name: 'UserProjectsDetail',
     element: UserProjectsDetail,

@@ -1,5 +1,6 @@
-import React, { Suspense, useEffect } from 'react'
+import React, { Fragment, Suspense, useEffect } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import './scss/style.scss'
 import { LayoutUser, LayoutAdmin } from './layout'
@@ -16,14 +17,16 @@ function App() {
     document.title = 'Howwork'
   })
 
-  const type = 'user'
-  const Layout = type === 'admin' ? LayoutAdmin : LayoutUser
+  let Layout = Fragment
+  const role = useSelector((state) => state.role)
+  if (role === 'admin') Layout = LayoutAdmin
+  else if (role === 'user') Layout = LayoutUser
 
   return (
     <Router>
       <Suspense fallback={loading}>
         <Routes>
-          <Route exact path="/account/login" name="Login Page" element={<Login props={type} />} />
+          <Route exact path="/account/login" name="Login Page" element={<Login />} />
           <Route
             exact
             path="/account/forgot-password"

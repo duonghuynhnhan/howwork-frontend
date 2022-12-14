@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, NavLink } from 'react-router-dom'
 import {
   CButton,
@@ -15,17 +15,25 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilLockLocked, cilUser } from '@coreui/icons'
-import PropTypes from 'prop-types'
 
-function Login({ props }) {
+import { accountService } from 'src/services/account.service'
+import store from 'src/store'
+
+function Login() {
   useEffect(() => {
     document.title = 'Login | Howwork'
   }, [])
 
   const navigate = useNavigate()
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
 
-  const handleSubmit = () => {
-    navigate(`/${props}/home`)
+  const handleSubmit = async () => {
+    const login = await accountService.login({ username, password })
+    if (login.message === 'Success') {
+      store.dispatch({ type: 'set', username, role: login.role })
+      navigate(`/${login.role}/home`)
+    }
   }
 
   return (
@@ -42,7 +50,12 @@ function Login({ props }) {
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Username" autoComplete="username" />
+                    <CFormInput
+                      placeholder="Username"
+                      autoComplete="username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-4">
                     <CInputGroupText>
@@ -52,6 +65,8 @@ function Login({ props }) {
                       type="password"
                       placeholder="Password"
                       autoComplete="current-password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </CInputGroup>
                   <CRow>
@@ -76,10 +91,6 @@ function Login({ props }) {
       </CContainer>
     </div>
   )
-}
-
-Login.propTypes = {
-  props: PropTypes.string,
 }
 
 export default Login

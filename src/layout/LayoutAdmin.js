@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import { AppSidebarAdmin, AppHeaderAdmin, AppContentAdmin, AppFooter } from '../components'
 
 function LayoutAdmin() {
@@ -16,10 +14,6 @@ function LayoutAdmin() {
       </div>
     </div>
   )
-}
-
-LayoutAdmin.propTypes = {
-  auth: PropTypes.string,
 }
 
 export default LayoutAdmin

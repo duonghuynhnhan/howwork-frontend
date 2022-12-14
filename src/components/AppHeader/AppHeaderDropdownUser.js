@@ -11,6 +11,7 @@ import { cilInfo, cilLockLocked, cilKeyboard, cilAccountLogout } from '@coreui/i
 import CIcon from '@coreui/icons-react'
 import { NavLink } from 'react-router-dom'
 
+import store from 'src/store'
 import avatar8 from '../../assets/images/avatars/10.jpg'
 
 function AppHeaderDropdownUser() {
@@ -39,7 +40,13 @@ function AppHeaderDropdownUser() {
           </CNavLink>
         </CDropdownItem>
         <CDropdownItem style={{ display: 'flex' }}>
-          <CNavLink to="/" component={NavLink}>
+          <CNavLink
+            to="/"
+            component={NavLink}
+            onClick={() => {
+              store.dispatch({ type: 'set', username: null, role: null })
+            }}
+          >
             <CIcon icon={cilAccountLogout} className="me-2" />
             Logout
           </CNavLink>

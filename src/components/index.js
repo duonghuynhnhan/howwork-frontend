@@ -7,6 +7,7 @@ import {
 } from './AppHeader'
 import { AppFooter } from './AppFooter'
 import { AppSidebarAdmin, AppSidebarUser } from './AppSidebar'
+import Page500 from './Page500'
 
 export {
   AppContentUser,
@@ -18,4 +19,5 @@ export {
   AppSidebarAdmin,
   AppSidebarUser,
   AppFooter,
+  Page500,
 }
