@@ -13,7 +13,7 @@ import {
 } from '../views'
 
 const adminRoutes = [
-  { path: '/admin/home', exact: true, name: 'AdminHomepage', element: AdminHomePage },
+  { path: '/admin/home', exact: true, name: 'AdminHomePage', element: AdminHomePage },
   {
     path: '/admin/notifications',
     exact: true,

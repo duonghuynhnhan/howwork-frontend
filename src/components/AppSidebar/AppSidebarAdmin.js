@@ -31,7 +31,7 @@ function AppSidebarAdmin() {
     },
     {
       component: CNavItem,
-      name: 'Project',
+      name: 'Projects',
       to: '/admin/projects',
       icon: <CIcon icon={cilNotes} customClassName="nav-icon" />,
     },

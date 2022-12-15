@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import {
   CButton,
   CButtonGroup,
@@ -28,6 +28,8 @@ import {
   cilUser,
   cilUserFemale,
 } from '@coreui/icons'
+
+import { personService } from 'src/services'
 
 function AdminHomePage() {
   const random = (min, max) => Math.floor(Math.random() * (max - min + 1) + min)
@@ -62,9 +64,16 @@ function AdminHomePage() {
     { title: 'LinkedIn', icon: cibLinkedin, percent: 8, value: '27,319' },
   ]
 
+  const username = useSelector((state) => state.username)
+  const [infor, setInfor] = useState({})
+
   useEffect(() => {
-    document.title = 'Kevin Duong | Howwork'
-  })
+    personService.information(username).then((info) => {
+      setInfor(info)
+    })
+
+    document.title = `${infor.fullname} | Howwork`
+  }, [username, infor.fullname])
 
   return (
     <>

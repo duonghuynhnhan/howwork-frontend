@@ -1,3 +1,4 @@
+import { personService } from './person.service'
 import { accountService } from './account.service'
 import { taskService } from './task.service'
 import { projectService } from './project.service'
@@ -9,6 +10,7 @@ import { taskCommentService } from './taskcomment.service'
 import { taskReportService } from './taskreport.service'
 
 export {
+  personService,
   accountService,
   taskService,
   projectAssignedService,

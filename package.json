@@ -35,7 +35,11 @@
     "chart.js": "^3.9.1",
     "classnames": "^2.3.2",
     "core-js": "^3.24.1",
+    "crypto": "^1.0.1",
+    "crypto-hash": "^2.0.1",
+    "crypto-js": "^4.1.1",
     "i": "^0.3.7",
+    "js-sha512": "^0.8.0",
     "moment": "^2.29.4",
     "npm": "^9.2.0",
     "prop-types": "^15.8.1",
@@ -48,7 +52,8 @@
     "react-redux": "^8.0.2",
     "react-select": "^5.7.0",
     "redux": "4.2.0",
-    "simplebar-react": "^2.4.1"
+    "simplebar-react": "^2.4.1",
+    "sjcl": "^1.0.8"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",

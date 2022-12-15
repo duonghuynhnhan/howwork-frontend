@@ -55,6 +55,11 @@ function Login() {
                       autoComplete="username"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          handleSubmit()
+                        }
+                      }}
                     />
                   </CInputGroup>
                   <CInputGroup className="mb-4">
@@ -66,6 +71,11 @@ function Login() {
                       placeholder="Password"
                       autoComplete="current-password"
                       value={password}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          handleSubmit()
+                        }
+                      }}
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </CInputGroup>

@@ -1,57 +1,24 @@
-const knex = require('../database/knex')
+import axios from 'axios'
+
+const url = 'http://localhost:3100'
 
 class PersonService {
-    constructor() {
-        this.persons = knex('persons')
-    }
+  constructor() {
+    this.api = axios.create({
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    })
+  }
 
-    #getPerson(payload) {
-        const person = { ...payload }
-        const personProperties = [
-            'id',
-            'fullname',
-            'dob',
-            'sex',
-            'email',
-            'phone',
-            'position',
-            'unit',
-        ]
+  async information(username) {
+    return (await this.api.get(`${url}/api/admin/information/${username}`)).data
+  }
 
-        Object.keys(person).forEach(function (key) {
-            if (personProperties.indexOf(key) == -1) {
-                delete person[key]
-            }
-        })
-
-        return person
-    }
-
-    async create(payload) {
-        const person = this.#getPerson(payload)
-        await this.persons.insert(person)
-        return { ...person }
-    }
-
-    async findByUsername(username) {
-        return await this.persons
-                        .join('accounts', 'persons.id', 'accounts.person')
-                        .where('accounts.username', username)
-                        .select('id', 'fullname', 'dob', 'sex', 'email', 'phone', 'position', 'unit')
-                        .first()
-    }
-
-    async findById(id) {
-        return await this.persons.where('id', id).select('*').first()
-    }
-
-    async update(username, payload) {
-        const update = this.#getPerson(payload)
-        return await this.persons
-                        .join('accounts', 'persons.id', 'accounts.person')
-                        .where('accounts.username', username)
-                        .update(update)
-    }
+  async create(payload) {
+    return (await this.api.post(`${url}/api/user`, payload)).data
+  }
 }
 
-module.exports = PersonService
+export const personService = new PersonService()

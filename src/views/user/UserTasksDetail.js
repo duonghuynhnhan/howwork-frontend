@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import {
   CCard,
@@ -177,12 +177,12 @@ function UserTasksDetail() {
                   </>
                 )}
               </div>
-            ) : (
+            ) : username === tasks.username ? (
               <CFormInput
                 style={{ width: '99.2%', margin: '5px' }}
                 type="text"
                 id="floatingInput"
-                placeholder="Add report for this project..."
+                placeholder="Add report for this task..."
                 value={inputReport}
                 onChange={(e) => {
                   setInputReport(e.target.value)
@@ -193,6 +193,8 @@ function UserTasksDetail() {
                   }
                 }}
               />
+            ) : (
+              <Fragment></Fragment>
             )}
           </CCardBody>
         </CCard>
