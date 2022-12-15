@@ -12,8 +12,8 @@ class ProjectAssignedService {
     })
   }
 
-  async all() {
-    return (await this.api.get(`${url}/api/projects`)).data
+  async all(username) {
+    return (await this.api.get(`${url}/api/user/projects/${username}`)).data
   }
 
   async create(payload) {

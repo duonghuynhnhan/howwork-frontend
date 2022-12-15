@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import {
@@ -31,7 +31,6 @@ import {
   cilListFilter,
   cilDataTransferDown,
   cilDataTransferUp,
-  cilHandPointUp,
   cilNotes,
   cilAvTimer,
 } from '@coreui/icons'
@@ -44,6 +43,7 @@ import {
   projectService,
   projectCommentService,
   projectAssignedService,
+  projectReportService,
   taskService,
   taskAssignedService,
 } from 'src/services'
@@ -57,6 +57,8 @@ function AdminProjectsDetail() {
   const [tasks, setTasks] = useState([])
   const [comments, setComments] = useState([])
   const [comment, setComment] = useState('')
+  const [report, setReport] = useState()
+  const [inputReport, setInputReport] = useState('')
   const [accounts, setAccounts] = useState([])
   const [visible, setVisible] = useState(false)
   const [noti, setNoti] = useState(false)
@@ -66,7 +68,6 @@ function AdminProjectsDetail() {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
   const [time, setTime] = useState()
-  const [completedDate, setCompletedDate] = useState(new Date())
   const [account, setAccount] = useState()
   const [note, setNote] = useState('')
 
@@ -101,9 +102,16 @@ function AdminProjectsDetail() {
       })
     }, 200)
 
+    let interval3 = setInterval(() => {
+      projectReportService.detail(project_id).then((report) => {
+        setReport(report)
+      })
+    }, 200)
+
     return () => {
       clearInterval(interval1)
       clearInterval(interval2)
+      clearInterval(interval3)
     }
   }, [project_id, project.name, comment])
 
@@ -140,6 +148,23 @@ function AdminProjectsDetail() {
     }
   }
 
+  const handleAddReport = async () => {
+    const payload = {
+      project: project_id,
+      file: inputReport,
+      uploadeddate: moment().format('DD/MM/YYYY HH:mm:ss'),
+    }
+    const report = await projectReportService.create(payload)
+
+    if (report) {
+      await projectService.update(project_id, {
+        completedstate: 100,
+        completeddate: moment().format('DD/MM/YYYY HH:mm:ss'),
+      })
+      setInputReport('')
+    }
+  }
+
   const clear = () => {
     setVisible(false)
     setName('')
@@ -147,7 +172,6 @@ function AdminProjectsDetail() {
     setStartDate(new Date())
     setEndDate(new Date())
     setTime()
-    setCompletedDate(new Date())
     setNote('')
     setAccount()
   }
@@ -161,7 +185,7 @@ function AdminProjectsDetail() {
       end: convertToString(endDate),
       time,
       createddate: moment().format('DD/MM/YYYY HH:mm:ss'),
-      completeddate: convertToString(completedDate),
+      completeddate: null,
       updateddate: null,
       completedstate: 0,
       note,
@@ -185,9 +209,7 @@ function AdminProjectsDetail() {
               <h4 id="traffic" className="card-title mb-0">
                 {project.name}
               </h4>
-              <CCardText style={{ color: 'coral' }}>
-                {'(FROM ' + project.start + ' TO ' + project.completeddate + ')'}
-              </CCardText>
+              <CCardText style={{ color: 'coral' }}>{'(FROM ' + project.start + ')'}</CCardText>
               <CCardText style={{ marginTop: '-10px' }}>{project.description}</CCardText>
               <CCardText style={{ marginTop: '-20px', color: 'red' }}>
                 {'(DEADLINE ' + project.end + ')'}
@@ -231,7 +253,6 @@ function AdminProjectsDetail() {
               )}
             </CCol>
             <hr></hr>
-            <CCardText>{}</CCardText>
           </CRow>
 
           <br></br>
@@ -241,12 +262,11 @@ function AdminProjectsDetail() {
               style={{
                 width: '99%',
                 margin: '5px',
-                background:
-                  convertToDate(task.end) < new Date() && convertToDate(task.start) < new Date()
-                    ? 'aqua'
-                    : convertToDate(task.end) > new Date() && convertToDate(task.start) < new Date()
-                    ? 'lightcoral'
-                    : 'gainsboro',
+                background: task.completeddate
+                  ? 'aqua'
+                  : convertToDate(task.end) > new Date() && convertToDate(task.start) < new Date()
+                  ? 'lightcoral'
+                  : 'gainsboro',
               }}
               key={task.id}
               onClick={() => {
@@ -264,6 +284,69 @@ function AdminProjectsDetail() {
           ))}
         </CCardBody>
       </CCard>
+
+      <>
+        <CCard className="mb-4">
+          <CCardBody>
+            <CRow>
+              <CCol sm={5}>
+                <h4 id="traffic" className="card-title mb-0">
+                  Report
+                </h4>
+              </CCol>
+            </CRow>
+            <br></br>
+
+            {report ? (
+              <div>
+                <CCardText>{report.uploadeddate}</CCardText>
+                <CCardText>{report.file}</CCardText>
+                {username === project.leader && (
+                  <>
+                    <CCol
+                      sm={7}
+                      className="d-none d-md-block"
+                      style={{ marginLeft: '450px', marginTop: '-40px' }}
+                    >
+                      <CButton
+                        color="danger"
+                        className="float-end"
+                        onClick={() => {
+                          projectService.update(project_id, {
+                            completedstate: 0,
+                            completeddate: '',
+                          })
+                          projectReportService.delete(report.project)
+                        }}
+                      >
+                        <CIcon icon={cilDelete} />
+                      </CButton>
+                    </CCol>
+                  </>
+                )}
+              </div>
+            ) : username === project.leader ? (
+              <CFormInput
+                style={{ width: '99.2%', margin: '5px' }}
+                type="text"
+                id="floatingInput"
+                placeholder="Add report for this project..."
+                value={inputReport}
+                onChange={(e) => {
+                  setInputReport(e.target.value)
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && inputReport.length > 0) {
+                    handleAddReport()
+                  }
+                }}
+              />
+            ) : (
+              <Fragment></Fragment>
+            )}
+          </CCardBody>
+        </CCard>
+      </>
 
       <>
         <CCard className="mb-4">
@@ -411,22 +494,6 @@ function AdminProjectsDetail() {
                   value={time}
                   onChange={(e) => setTime(e.target.value)}
                 />
-              </CInputGroup>
-              <CInputGroup className="mb-3">
-                <CInputGroupText>
-                  <CIcon icon={cilHandPointUp} />
-                </CInputGroupText>
-                <div>
-                  <DatePicker
-                    selected={completedDate}
-                    minDate={endDate}
-                    onChange={(date) => setCompletedDate(date)}
-                    placeholderText="Completed Date"
-                    dateFormat="dd/MM/yyyy HH:mm:ss"
-                    showTimeSelect
-                    timeFormat="HH:mm:ss"
-                  />
-                </div>
               </CInputGroup>
               <CInputGroup className="mb-3">
                 <CInputGroupText>

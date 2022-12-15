@@ -20,7 +20,7 @@ import { cilDelete, cilPencil } from '@coreui/icons'
 import { useLocation } from 'react-router-dom'
 import moment from 'moment'
 
-import { taskService, taskCommentService } from 'src/services'
+import { taskService, taskCommentService, taskReportService } from 'src/services'
 
 function AdminTasksDetail() {
   const task_id = useLocation().state
@@ -29,24 +29,35 @@ function AdminTasksDetail() {
   const [tasks, setTasks] = useState({})
   const [comments, setComments] = useState([])
   const [comment, setComment] = useState('')
+  const [report, setReport] = useState({})
 
   useEffect(() => {
     document.title = `${tasks.name} | Howwork`
   })
 
   useEffect(() => {
-    taskService.detail(task_id).then((task) => {
-      setTasks(task)
+    let interval1 = setInterval(() => {
+      taskService.detail(task_id).then((task) => {
+        setTasks(task)
+      })
     })
 
-    let interval = setInterval(() => {
+    let interval2 = setInterval(() => {
       taskCommentService.all(task_id).then((comment) => {
         setComments(comment)
       })
     }, 200)
 
+    let interval3 = setInterval(() => {
+      taskReportService.detail(task_id).then((report) => {
+        setReport(report)
+      })
+    }, 200)
+
     return () => {
-      clearInterval(interval)
+      clearInterval(interval1)
+      clearInterval(interval2)
+      clearInterval(interval3)
     }
   }, [task_id])
 
@@ -109,7 +120,7 @@ function AdminTasksDetail() {
                 <CTableDataCell>{tasks.createddate}</CTableDataCell>
                 <CTableDataCell>{tasks.completeddate}</CTableDataCell>
                 <CTableDataCell>{tasks.start}</CTableDataCell>
-                <CTableDataCell>{tasks.end}</CTableDataCell>
+                <CTableDataCell style={{ color: 'lightcoral' }}>{tasks.end}</CTableDataCell>
                 <CTableDataCell>{tasks.time} hours</CTableDataCell>
                 <CTableDataCell>{tasks.note}</CTableDataCell>
               </CTableRow>
@@ -117,6 +128,26 @@ function AdminTasksDetail() {
           </CTable>
         </CCardBody>
       </CCard>
+
+      <>
+        <CCard className="mb-4">
+          <CCardBody>
+            <CRow>
+              <CCol sm={5}>
+                <h4 id="traffic" className="card-title mb-0">
+                  Report
+                </h4>
+              </CCol>
+            </CRow>
+            <br></br>
+
+            <div>
+              <CCardText>{report.uploadeddate}</CCardText>
+              <CCardText>{report.file}</CCardText>
+            </div>
+          </CCardBody>
+        </CCard>
+      </>
 
       <>
         <CCard className="mb-4">

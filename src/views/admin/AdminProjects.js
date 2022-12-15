@@ -32,7 +32,6 @@ import {
   cilListFilter,
   cilDataTransferDown,
   cilDataTransferUp,
-  cilHandPointUp,
   cilNotes,
   cilAvTimer,
 } from '@coreui/icons'
@@ -57,7 +56,6 @@ function AdminProjects() {
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState(new Date())
   const [time, setTime] = useState()
-  const [completedDate, setCompletedDate] = useState(new Date())
   const [note, setNote] = useState('')
   const [selected, setSelected] = useState([])
 
@@ -107,7 +105,6 @@ function AdminProjects() {
     setStartDate(new Date())
     setEndDate(new Date())
     setTime()
-    setCompletedDate(new Date())
     setNote('')
     setSelected([])
   }
@@ -120,7 +117,7 @@ function AdminProjects() {
       end: convertToString(endDate),
       time,
       createddate: moment().format('DD/MM/YYYY HH:mm:ss'),
-      completeddate: convertToString(completedDate),
+      completeddate: null,
       updateddate: null,
       leader: username,
       completedstate: 0,
@@ -199,14 +196,12 @@ function AdminProjects() {
                     navigate(`/admin/project/${project.id}`, { replace: true, state: project.id })
                   }}
                   style={{
-                    background:
-                      convertToDate(project.end) < new Date() &&
-                      convertToDate(project.start) < new Date()
-                        ? 'aqua'
-                        : convertToDate(project.end) > new Date() &&
-                          convertToDate(project.start) < new Date()
-                        ? 'lightcoral'
-                        : 'gainsboro',
+                    background: project.completeddate
+                      ? 'aqua'
+                      : convertToDate(project.end) > new Date() &&
+                        convertToDate(project.start) < new Date()
+                      ? 'lightcoral'
+                      : 'gainsboro',
                   }}
                 >
                   <CTableDataCell>{index + 1}</CTableDataCell>
@@ -310,22 +305,6 @@ function AdminProjects() {
                   value={time}
                   onChange={(e) => setTime(e.target.value)}
                 />
-              </CInputGroup>
-              <CInputGroup className="mb-3">
-                <CInputGroupText>
-                  <CIcon icon={cilHandPointUp} />
-                </CInputGroupText>
-                <div>
-                  <DatePicker
-                    selected={completedDate}
-                    minDate={endDate}
-                    onChange={(date) => setCompletedDate(date)}
-                    placeholderText="Completed Date"
-                    dateFormat="dd/MM/yyyy HH:mm:ss"
-                    showTimeSelect
-                    timeFormat="HH:mm:ss"
-                  />
-                </div>
               </CInputGroup>
               <CInputGroup className="mb-3">
                 <CInputGroupText>

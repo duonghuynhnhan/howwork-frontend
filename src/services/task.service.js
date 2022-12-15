@@ -24,25 +24,9 @@ class TaskService {
     return (await this.api.post(`${url}/api/task`, payload)).data
   }
 
-  //   async getMany() {
-  //     return (await this.api.get(this.baseUrl)).data
-  //   }
-
-  //   async deleteMany() {
-  //     return (await this.api.delete(this.baseUrl)).data
-  //   }
-
-  //   async get(id) {
-  //     return (await this.api.get(`${this.baseUrl}/${id}`)).data
-  //   }
-
-  //   async update(id, admin) {
-  //     return (await this.api.put(`${this.baseUrl}/${id}`, admin)).data
-  //   }
-
-  //   async delete(id) {
-  //     return (await this.api.delete(`${this.baseUrl}/${id}`)).data
-  //   }
+  async update(task_id, payload) {
+    return (await this.api.put(`${url}/api/task/${task_id}`, payload)).data
+  }
 }
 
 export const taskService = new TaskService()
