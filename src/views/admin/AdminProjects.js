@@ -110,29 +110,33 @@ function AdminProjects() {
   }
 
   const handleCreate = async () => {
-    const payload = {
-      name,
-      description,
-      start: convertToString(startDate),
-      end: convertToString(endDate),
-      time,
-      createddate: moment().format('DD/MM/YYYY HH:mm:ss'),
-      completeddate: null,
-      updateddate: null,
-      leader: username,
-      completedstate: 0,
-      note,
-    }
+    if (name && description && startDate && endDate && time && note && selected.length > 0) {
+      const payload = {
+        name,
+        description,
+        start: convertToString(startDate),
+        end: convertToString(endDate),
+        time,
+        createddate: moment().format('DD/MM/YYYY HH:mm:ss'),
+        completeddate: null,
+        updateddate: null,
+        leader: username,
+        completedstate: 0,
+        note,
+      }
 
-    const create = await projectService.create(payload)
-    selected.map(async (select) => {
-      const data = { project: create.id, user: select.value }
-      await projectAssignedService.create(data)
-    })
+      const create = await projectService.create(payload)
+      selected.map(async (select) => {
+        const data = { project: create.id, user: select.value }
+        await projectAssignedService.create(data)
+      })
 
-    if (create) {
-      clear()
-      setNoti(true)
+      if (create) {
+        clear()
+        setNoti(true)
+      }
+    } else {
+      alert('Input full information, please!!!')
     }
   }
 

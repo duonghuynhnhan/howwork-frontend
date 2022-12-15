@@ -94,33 +94,37 @@ function AdminCreateAdmin() {
   })
 
   const handleCreate = async () => {
-    const payload = {
-      id,
-      fullname,
-      dob: convertToString(dob),
-      sex,
-      email,
-      phone,
-      position,
-      unit,
-      username,
-      password: username,
-      keypass: username,
-      role: 'user',
-    }
+    if (id && fullname && dob && sex && email && phone && position && unit) {
+      const payload = {
+        id,
+        fullname,
+        dob: convertToString(dob),
+        sex,
+        email,
+        phone,
+        position,
+        unit,
+        username,
+        password: username,
+        keypass: username,
+        role: 'admin',
+      }
 
-    const data = await personService.create(payload)
-    if (data) {
-      setNoti(true)
-      setId('')
-      setUsername('')
-      setFullName('')
-      setDOB(new Date())
-      setEmail('')
-      setSex('')
-      setPhone('')
-      setPosition('')
-      setUnit('')
+      const data = await personService.create(payload)
+      if (data) {
+        setNoti(true)
+        setId('')
+        setUsername('')
+        setFullName('')
+        setDOB(new Date())
+        setEmail('')
+        setSex('')
+        setPhone('')
+        setPosition('')
+        setUnit('')
+      }
+    } else {
+      alert('Input full information, please!!!')
     }
   }
 
