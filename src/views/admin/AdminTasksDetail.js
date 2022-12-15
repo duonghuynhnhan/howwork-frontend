@@ -17,7 +17,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilDelete, cilPencil } from '@coreui/icons'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import moment from 'moment'
 
 import { taskService, taskCommentService, taskReportService } from 'src/services'
@@ -25,6 +25,7 @@ import { taskService, taskCommentService, taskReportService } from 'src/services
 function AdminTasksDetail() {
   const task_id = useLocation().state
   const username = useSelector((state) => state.username)
+  const navigate = useNavigate()
 
   const [tasks, setTasks] = useState({})
   const [comments, setComments] = useState([])
@@ -89,7 +90,15 @@ function AdminTasksDetail() {
               <>
                 <CCol sm={7} className="d-none d-md-block">
                   <CButton color="secondary" className="float-end">
-                    <CIcon icon={cilPencil} />
+                    <CIcon
+                      icon={cilPencil}
+                      onClick={() => {
+                        navigate(`/admin/project/${tasks.memberof}/task/${tasks.id}/edit`, {
+                          replace: true,
+                          state: tasks.id,
+                        })
+                      }}
+                    />
                   </CButton>
                 </CCol>
               </>

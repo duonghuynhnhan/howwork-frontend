@@ -12,7 +12,9 @@ import {
   AdminChangeKey,
   AdminChangePassword,
   AdminProjectsDetail,
+  AdminEditProject,
   AdminTasksDetail,
+  AdminEditTask,
 } from './admin'
 import {
   UserHomePage,
@@ -43,7 +45,9 @@ export {
   AdminChangeKey,
   AdminChangePassword,
   AdminProjectsDetail,
+  AdminEditProject,
   AdminTasksDetail,
+  AdminEditTask,
   UserHomePage,
   UserNotifications,
   UserTasks,

@@ -10,7 +10,9 @@ import {
   AdminChangePassword,
   AdminChangeKey,
   AdminProjectsDetail,
+  AdminEditProject,
   AdminTasksDetail,
+  AdminEditTask,
 } from '../views'
 
 const adminRoutes = [
@@ -80,6 +82,18 @@ const adminRoutes = [
     exact: true,
     name: 'AdminProjectsDetail',
     element: AdminProjectsDetail,
+  },
+  {
+    path: '/admin/project/:id/edit',
+    exact: true,
+    name: 'AdminEditProject',
+    element: AdminEditProject,
+  },
+  {
+    path: '/admin/project/:project_id/task/:task_id/edit',
+    exact: true,
+    name: 'AdminEditTask',
+    element: AdminEditTask,
   },
 ]
 

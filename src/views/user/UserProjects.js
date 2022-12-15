@@ -68,6 +68,7 @@ function UserProjects() {
                           : value === 'Present'
                           ? 'lightcoral'
                           : 'gainsboro',
+                      color: 'black',
                     }}
                   >
                     {value}

@@ -34,7 +34,6 @@ import {
   cilNotes,
   cilAvTimer,
 } from '@coreui/icons'
-
 import moment from 'moment'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
@@ -60,6 +59,7 @@ function AdminProjectsDetail() {
   const [report, setReport] = useState()
   const [inputReport, setInputReport] = useState('')
   const [accounts, setAccounts] = useState([])
+
   const [visible, setVisible] = useState(false)
   const [noti, setNoti] = useState(false)
 
@@ -71,7 +71,7 @@ function AdminProjectsDetail() {
   const [account, setAccount] = useState()
   const [note, setNote] = useState('')
 
-  let options = ['Open this select accounts']
+  let options = []
   for (var i = 0; i < accounts.length; i++) {
     options.push({
       label: accounts[i].fullname + ' ' + accounts[i].username,
@@ -210,10 +210,18 @@ function AdminProjectsDetail() {
                 {project.name}
               </h4>
               <CCardText style={{ color: 'coral' }}>{'(FROM ' + project.start + ')'}</CCardText>
-              <CCardText style={{ marginTop: '-10px' }}>{project.description}</CCardText>
               <CCardText style={{ marginTop: '-20px', color: 'red' }}>
                 {'(DEADLINE ' + project.end + ')'}
               </CCardText>
+              <CCardText style={{ marginTop: '-10px' }}>
+                Description: {project.description}
+              </CCardText>
+              <CCardText>Members: </CCardText>
+              {accounts.map((account, index) => (
+                <CCardText key={index} style={{ marginTop: '-20px' }}>
+                  {account.fullname + ' ' + account.username}
+                </CCardText>
+              ))}
             </CCol>
             <CCol sm={7} className="d-none d-md-block">
               {username === project.leader && (
@@ -228,7 +236,15 @@ function AdminProjectsDetail() {
                     <CIcon icon={cilPlus} />
                   </CButton>
                   <CButton color="secondary" className="float-end">
-                    <CIcon icon={cilPencil} />
+                    <CIcon
+                      icon={cilPencil}
+                      onClick={() => {
+                        navigate(`/admin/project/${project_id}/edit`, {
+                          replace: true,
+                          state: project.id,
+                        })
+                      }}
+                    />
                   </CButton>
                   <CButtonGroup className="float-end me-3">
                     {['Completed', 'Present', 'Pending'].map((value) => (
@@ -243,6 +259,7 @@ function AdminProjectsDetail() {
                               : value === 'Present'
                               ? 'lightcoral'
                               : 'gainsboro',
+                          color: 'black',
                         }}
                       >
                         {value}

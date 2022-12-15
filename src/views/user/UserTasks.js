@@ -66,6 +66,7 @@ function UserTasks() {
                           : value === 'Present'
                           ? 'lightcoral'
                           : 'gainsboro',
+                      color: 'black',
                     }}
                   >
                     {value}

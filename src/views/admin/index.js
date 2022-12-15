@@ -9,7 +9,9 @@ import AdminInformation from './AdminInformation'
 import AdminChangePassword from './AdminChangePassword'
 import AdminChangeKey from './AdminChangeKey'
 import AdminProjectsDetail from './AdminProjectsDetail'
+import AdminEditProject from './AdminEditProject'
 import AdminTasksDetail from './AdminTasksDetail'
+import AdminEditTask from './AdminEditTask'
 
 export {
   AdminHomePage,
@@ -23,5 +25,7 @@ export {
   AdminChangePassword,
   AdminChangeKey,
   AdminProjectsDetail,
+  AdminEditProject,
   AdminTasksDetail,
+  AdminEditTask,
 }
