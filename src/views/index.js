@@ -2,6 +2,7 @@ import Home from './home'
 import { Login, ForgotPassword } from './account'
 import {
   AdminHomePage,
+  AdminChangeInformation,
   AdminNotifications,
   AdminProjects,
   AdminSummary,
@@ -33,6 +34,7 @@ export {
   ForgotPassword,
   AdminHomePage,
   AdminNotifications,
+  AdminChangeInformation,
   AdminProjects,
   AdminSummary,
   AdminCreateUser,

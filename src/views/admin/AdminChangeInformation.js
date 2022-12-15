@@ -32,7 +32,7 @@ import {
 
 import { personService } from 'src/services'
 
-function UserChangeInformation() {
+function AdminChangeInformation() {
   const username = useSelector((state) => state.username)
   const navigate = useNavigate()
 
@@ -255,13 +255,13 @@ function UserChangeInformation() {
           visible={noti}
           onClose={() => {
             setNoti(false)
-            navigate('/user/information')
+            navigate('/admin/information')
           }}
         >
           <CModalHeader
             onClose={() => {
               setNoti(false)
-              navigate('/user/information')
+              navigate('/admin/information')
             }}
           >
             <CModalTitle>Notifications</CModalTitle>
@@ -272,7 +272,7 @@ function UserChangeInformation() {
               color="secondary"
               onClick={() => {
                 setNoti(false)
-                navigate('/user/information')
+                navigate('/admin/information')
               }}
             >
               Close
@@ -281,7 +281,7 @@ function UserChangeInformation() {
               color="primary"
               onClick={() => {
                 setNoti(false)
-                navigate('/user/information')
+                navigate('/admin/information')
               }}
             >
               OK
@@ -293,4 +293,4 @@ function UserChangeInformation() {
   )
 }
 
-export default UserChangeInformation
+export default AdminChangeInformation

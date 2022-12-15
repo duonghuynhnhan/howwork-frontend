@@ -1,4 +1,5 @@
 import AdminHomePage from './AdminHomePage'
+import AdminChangeInformation from './AdminChangeInformation'
 import AdminNotifications from './AdminNotifications'
 import AdminProjects from './AdminProjects'
 import AdminSummary from './AdminSummary'
@@ -12,6 +13,7 @@ import AdminTasksDetail from './AdminTasksDetail'
 
 export {
   AdminHomePage,
+  AdminChangeInformation,
   AdminNotifications,
   AdminProjects,
   AdminSummary,

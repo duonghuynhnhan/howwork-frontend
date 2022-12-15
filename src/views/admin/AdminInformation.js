@@ -1,4 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import {
   CButton,
   CCard,
@@ -10,13 +12,33 @@ import {
   CInputGroup,
   CInputGroupText,
   CRow,
+  CNavLink,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilAsteriskCircle, cilUser, cilPhone, cilBank } from '@coreui/icons'
+import {
+  cilAsteriskCircle,
+  cilUser,
+  cilPhone,
+  cilBank,
+  cilBirthdayCake,
+  cilTags,
+} from '@coreui/icons'
+
+import { personService } from 'src/services'
 
 function AdminInformation() {
+  const username = useSelector((state) => state.username)
+
+  const [info, setInfo] = useState({})
+
   useEffect(() => {
     document.title = 'Information | Howwork'
+
+    let interval = setInterval(() => {
+      personService.information(username).then((info) => setInfo(info))
+    }, 200)
+
+    return () => clearInterval(interval)
   })
 
   return (
@@ -31,41 +53,79 @@ function AdminInformation() {
               <CCardBody className="p-4">
                 <CForm>
                   <h1>Personal Information</h1>
-                  <p className="text-medium-emphasis">Change your information</p>
-                  <CInputGroup className="mb-3">
-                    <p className="text-medium-emphasis">Avatar:</p>
-                    <input type={'file'}></input>
-                  </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Full name" autoComplete="fullname" />
+                    <CFormInput placeholder="ID" autoComplete="id" value={info.id} disabled />
+                  </CInputGroup>
+
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilUser} />
+                    </CInputGroupText>
+                    <CFormInput
+                      placeholder="Full name"
+                      autoComplete="fullname"
+                      value={info.fullname}
+                      disabled
+                    />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilBirthdayCake} />
+                    </CInputGroupText>
+                    <CFormInput placeholder="DOB" autoComplete="dob" value={info.dob} disabled />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilTags} />
+                    </CInputGroupText>
+                    <CFormInput placeholder="Sex" autoComplete="sex" value={info.sex} disabled />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>@</CInputGroupText>
-                    <CFormInput placeholder="Email" autoComplete="email" />
+                    <CFormInput
+                      placeholder="Email"
+                      autoComplete="email"
+                      value={info.email}
+                      disabled
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilPhone} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Phone" autoComplete="phone" />
+                    <CFormInput
+                      placeholder="Phone"
+                      autoComplete="phone"
+                      value={info.phone}
+                      disabled
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilAsteriskCircle} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Position" autoComplete="position" />
+                    <CFormInput
+                      placeholder="Position"
+                      autoComplete="position"
+                      value={info.position}
+                      disabled
+                    />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilBank} />
                     </CInputGroupText>
-                    <CFormInput placeholder="Unit" autoComplete="unit" />
+                    <CFormInput placeholder="Unit" autoComplete="unit" value={info.unit} disabled />
                   </CInputGroup>
                   <div className="d-grid">
-                    <CButton color="success">Create User Account</CButton>
+                    <CButton>
+                      <CNavLink to="/admin/change-information" component={NavLink}>
+                        Change Your Information
+                      </CNavLink>
+                    </CButton>
                   </div>
                 </CForm>
               </CCardBody>

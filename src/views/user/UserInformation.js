@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import {
   CButton,
   CCard,
@@ -14,11 +15,30 @@ import {
   CNavLink,
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import { cilAsteriskCircle, cilUser, cilPhone, cilBank } from '@coreui/icons'
+import {
+  cilAsteriskCircle,
+  cilUser,
+  cilPhone,
+  cilBank,
+  cilBirthdayCake,
+  cilTags,
+} from '@coreui/icons'
+
+import { personService } from 'src/services'
 
 function UserInformation() {
+  const username = useSelector((state) => state.username)
+
+  const [info, setInfo] = useState({})
+
   useEffect(() => {
     document.title = 'Information | Howwork'
+
+    let interval = setInterval(() => {
+      personService.information(username).then((info) => setInfo(info))
+    }, 200)
+
+    return () => clearInterval(interval)
   })
 
   return (
@@ -33,12 +53,11 @@ function UserInformation() {
               <CCardBody className="p-4">
                 <CForm>
                   <h1>Personal Information</h1>
-                  <p className="text-medium-emphasis">Change your information</p>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>
                       <CIcon icon={cilUser} />
                     </CInputGroupText>
-                    <CFormInput placeholder="ID" autoComplete="id" value={'B1910676'} disabled />
+                    <CFormInput placeholder="ID" autoComplete="id" value={info.id} disabled />
                   </CInputGroup>
 
                   <CInputGroup className="mb-3">
@@ -48,16 +67,28 @@ function UserInformation() {
                     <CFormInput
                       placeholder="Full name"
                       autoComplete="fullname"
-                      value={'Kevin Duong'}
+                      value={info.fullname}
                       disabled
                     />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilBirthdayCake} />
+                    </CInputGroupText>
+                    <CFormInput placeholder="DOB" autoComplete="dob" value={info.dob} disabled />
+                  </CInputGroup>
+                  <CInputGroup className="mb-3">
+                    <CInputGroupText>
+                      <CIcon icon={cilTags} />
+                    </CInputGroupText>
+                    <CFormInput placeholder="Sex" autoComplete="sex" value={info.sex} disabled />
                   </CInputGroup>
                   <CInputGroup className="mb-3">
                     <CInputGroupText>@</CInputGroupText>
                     <CFormInput
                       placeholder="Email"
                       autoComplete="email"
-                      value={'duonghuynhnhan@outlook.com'}
+                      value={info.email}
                       disabled
                     />
                   </CInputGroup>
@@ -68,7 +99,7 @@ function UserInformation() {
                     <CFormInput
                       placeholder="Phone"
                       autoComplete="phone"
-                      value={'0354984001'}
+                      value={info.phone}
                       disabled
                     />
                   </CInputGroup>
@@ -79,7 +110,7 @@ function UserInformation() {
                     <CFormInput
                       placeholder="Position"
                       autoComplete="position"
-                      value={'Student'}
+                      value={info.position}
                       disabled
                     />
                   </CInputGroup>
@@ -87,12 +118,7 @@ function UserInformation() {
                     <CInputGroupText>
                       <CIcon icon={cilBank} />
                     </CInputGroupText>
-                    <CFormInput
-                      placeholder="Unit"
-                      autoComplete="unit"
-                      value={'College of Information Technology'}
-                      disabled
-                    />
+                    <CFormInput placeholder="Unit" autoComplete="unit" value={info.unit} disabled />
                   </CInputGroup>
                   <div className="d-grid">
                     <CButton>

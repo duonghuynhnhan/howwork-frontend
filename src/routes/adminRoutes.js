@@ -1,6 +1,7 @@
 import {
   AdminHomePage,
   AdminNotifications,
+  AdminChangeInformation,
   AdminProjects,
   AdminSummary,
   AdminCreateUser,
@@ -49,6 +50,12 @@ const adminRoutes = [
     exact: true,
     name: 'AdminInformation',
     element: AdminInformation,
+  },
+  {
+    path: '/admin/change-information',
+    exact: true,
+    name: 'AdminChangeInformation',
+    element: AdminChangeInformation,
   },
   {
     path: '/admin/change-password',
