@@ -33,6 +33,10 @@ function Login() {
     if (login.message === 'Success') {
       store.dispatch({ type: 'set', username, role: login.role })
       navigate(`/${login.role}/home`)
+    } else {
+      alert('Username or password is invalid!!!')
+      setUsername('')
+      setPassword('')
     }
   }
 
