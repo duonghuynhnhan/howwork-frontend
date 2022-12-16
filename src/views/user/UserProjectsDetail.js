@@ -109,6 +109,9 @@ function UserProjectsDetail() {
                 {'(DEADLINE ' + project.end + ')'}
               </CCardText>
               <CCardText style={{ marginTop: '-10px' }}>
+                <b>Leader</b>: {project.fullname + ' ' + project.leader}
+              </CCardText>
+              <CCardText style={{ marginTop: '-10px' }}>
                 <b>Description</b>: {project.description}
               </CCardText>
               <CCardText>
