@@ -30,6 +30,7 @@ function UserChangePassword() {
   const [oldPassword, setOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [rePassword, setRePassword] = useState('')
+
   const [noti, setNoti] = useState(false)
 
   useEffect(() => {

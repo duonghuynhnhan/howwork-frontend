@@ -35,6 +35,8 @@ import { projectService, projectAssignedService, accountService } from 'src/serv
 
 function AdminEditProject() {
   const project_id = useLocation().state
+  const navigate = useNavigate()
+
   const [accountsAssign, setAccountsAssign] = useState([])
   const [accounts, setAccounts] = useState([])
 
@@ -47,7 +49,6 @@ function AdminEditProject() {
   const [selected, setSelected] = useState([])
 
   const [noti, setNoti] = useState(false)
-  const navigate = useNavigate()
 
   let optionsAssign = []
   let optionsAccount = []

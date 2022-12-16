@@ -95,7 +95,7 @@ function AdminTasksDetail() {
                       onClick={() => {
                         navigate(`/admin/project/${tasks.memberof}/task/${tasks.id}/edit`, {
                           replace: true,
-                          state: tasks.id,
+                          state: tasks,
                         })
                       }}
                     />

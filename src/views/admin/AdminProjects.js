@@ -109,7 +109,7 @@ function AdminProjects() {
     setSelected([])
   }
 
-  const handleCreate = async () => {
+  const handleCreateProject = async () => {
     if (name && description && startDate && endDate && time && note && selected.length > 0) {
       const payload = {
         name,
@@ -347,7 +347,7 @@ function AdminProjects() {
             >
               Close
             </CButton>
-            <CButton color="primary" onClick={handleCreate}>
+            <CButton color="primary" onClick={handleCreateProject}>
               Create project
             </CButton>
           </CModalFooter>

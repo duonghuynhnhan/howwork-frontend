@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 import {
   CCard,
   CCardBody,
@@ -17,7 +18,6 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilDelete } from '@coreui/icons'
-import { useLocation } from 'react-router-dom'
 import moment from 'moment'
 
 import { taskService, taskCommentService, taskReportService } from 'src/services'
@@ -34,9 +34,7 @@ function UserTasksDetail() {
 
   useEffect(() => {
     document.title = `${tasks.name} | Howwork`
-  })
 
-  useEffect(() => {
     let interval1 = setInterval(() => {
       taskService.detail(task_id).then((task) => {
         setTasks(task)
@@ -60,7 +58,7 @@ function UserTasksDetail() {
       clearInterval(interval2)
       clearInterval(interval3)
     }
-  }, [task_id])
+  }, [task_id, tasks.name])
 
   const handleAddComment = async () => {
     const payload = {

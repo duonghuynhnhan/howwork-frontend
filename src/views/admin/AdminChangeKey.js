@@ -30,6 +30,7 @@ function AdminChangeKey() {
   const [oldKey, setOldKey] = useState('')
   const [newKey, setNewKey] = useState('')
   const [reKey, setReKey] = useState('')
+
   const [noti, setNoti] = useState(false)
 
   useEffect(() => {

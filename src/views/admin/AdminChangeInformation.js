@@ -44,6 +44,7 @@ function AdminChangeInformation() {
   const [phone, setPhone] = useState('')
   const [position, setPosition] = useState('')
   const [unit, setUnit] = useState('')
+
   const [noti, setNoti] = useState(false)
 
   const sexs = ['Sex', { label: 'Male', value: 'Male' }, { label: 'Female', value: 'Female' }]

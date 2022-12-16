@@ -176,7 +176,7 @@ function AdminProjectsDetail() {
     setAccount()
   }
 
-  const handleCreate = async () => {
+  const handleCreateTask = async () => {
     const payload = {
       name,
       description,
@@ -547,7 +547,7 @@ function AdminProjectsDetail() {
             >
               Close
             </CButton>
-            <CButton color="primary" onClick={handleCreate}>
+            <CButton color="primary" onClick={handleCreateTask}>
               Create task
             </CButton>
           </CModalFooter>
