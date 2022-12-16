@@ -71,7 +71,7 @@ function AdminProjectsDetail() {
   const [account, setAccount] = useState()
   const [note, setNote] = useState('')
 
-  let options = []
+  let options = ['Select account']
   for (var i = 0; i < accounts.length; i++) {
     options.push({
       label: accounts[i].fullname + ' ' + accounts[i].username,
@@ -177,26 +177,28 @@ function AdminProjectsDetail() {
   }
 
   const handleCreateTask = async () => {
-    const payload = {
-      name,
-      description,
-      memberof: project_id,
-      start: convertToString(startDate),
-      end: convertToString(endDate),
-      time,
-      createddate: moment().format('DD/MM/YYYY HH:mm:ss'),
-      completeddate: null,
-      updateddate: null,
-      completedstate: 0,
-      note,
-    }
+    if (name && description && startDate && endDate && time && note && account) {
+      const payload = {
+        name,
+        description,
+        memberof: project_id,
+        start: convertToString(startDate),
+        end: convertToString(endDate),
+        time,
+        createddate: moment().format('DD/MM/YYYY HH:mm:ss'),
+        completeddate: null,
+        updateddate: null,
+        completedstate: 0,
+        note,
+      }
 
-    const create = await taskService.create(payload)
-    const data = { task: create.id, user: account }
-    const assigned = await taskAssignedService.create(data)
-    if (create && assigned) {
-      setNoti(true)
-      clear()
+      const create = await taskService.create(payload)
+      const data = { task: create.id, user: account }
+      const assigned = await taskAssignedService.create(data)
+      if (create && assigned) {
+        setNoti(true)
+        clear()
+      }
     }
   }
 
