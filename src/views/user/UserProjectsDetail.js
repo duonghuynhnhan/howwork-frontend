@@ -114,7 +114,7 @@ function UserProjectsDetail() {
               <CCardText style={{ marginTop: '-10px' }}>
                 <b>Description</b>: {project.description}
               </CCardText>
-              <CCardText>
+              <CCardText style={{ marginTop: '-10px' }}>
                 <b>Members: </b>
               </CCardText>
               {accounts.map((account, index) => (
