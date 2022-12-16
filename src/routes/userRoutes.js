@@ -1,6 +1,5 @@
 import {
   UserHomePage,
-  UserNotifications,
   UserTasks,
   UserProjects,
   UserSummary,
@@ -14,12 +13,6 @@ import {
 
 const userRoutes = [
   { path: '/user/home', exact: true, name: 'UserHomepage', element: UserHomePage },
-  {
-    path: '/user/notifications',
-    exact: true,
-    name: 'UserNotifications',
-    element: UserNotifications,
-  },
   {
     path: '/user/tasks',
     exact: true,

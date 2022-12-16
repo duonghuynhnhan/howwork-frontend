@@ -21,6 +21,7 @@ import {
   projectService,
   projectCommentService,
   projectReportService,
+  projectAssignedService,
   taskService,
 } from 'src/services'
 
@@ -34,12 +35,17 @@ function UserProjectsDetail() {
   const [comments, setComments] = useState([])
   const [comment, setComment] = useState('')
   const [report, setReport] = useState({})
+  const [accounts, setAccounts] = useState([])
 
   useEffect(() => {
     document.title = `${project.name} | Howwork`
 
     projectService.detail(project_id).then((project) => {
       setProject(project)
+    })
+
+    projectAssignedService.allMember(project_id).then((account) => {
+      setAccounts(account)
     })
 
     let interval1 = setInterval(() => {
@@ -99,10 +105,20 @@ function UserProjectsDetail() {
                 {project.name}
               </h4>
               <CCardText style={{ color: 'coral' }}>{'(FROM ' + project.start + ')'}</CCardText>
-              <CCardText style={{ marginTop: '-10px' }}>{project.description}</CCardText>
               <CCardText style={{ marginTop: '-20px', color: 'red' }}>
                 {'(DEADLINE ' + project.end + ')'}
               </CCardText>
+              <CCardText style={{ marginTop: '-10px' }}>
+                <b>Description</b>: {project.description}
+              </CCardText>
+              <CCardText>
+                <b>Members: </b>
+              </CCardText>
+              {accounts.map((account, index) => (
+                <CCardText key={index} style={{ marginTop: '-20px' }}>
+                  &emsp;{account.fullname + ' ' + account.username}
+                </CCardText>
+              ))}
             </CCol>
             <CCol sm={7} className="d-none d-md-block">
               <CButtonGroup className="float-end me-3">
@@ -127,7 +143,6 @@ function UserProjectsDetail() {
               </CButtonGroup>
             </CCol>
             <hr></hr>
-            <CCardText>{}</CCardText>
           </CRow>
 
           <br></br>

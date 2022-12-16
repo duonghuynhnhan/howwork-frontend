@@ -1,6 +1,5 @@
 import UserHomePage from './UserHomePage'
 import UserTasks from './UserTasks'
-import UserNotifications from './UserNotifications'
 import UserProjects from './UserProjects'
 import UserSummary from './UserSummary'
 import UserInformation from './UserInformation'
@@ -13,7 +12,6 @@ import UserProjectsDetail from './UserProjectsDetail'
 export {
   UserHomePage,
   UserTasks,
-  UserNotifications,
   UserProjects,
   UserSummary,
   UserInformation,

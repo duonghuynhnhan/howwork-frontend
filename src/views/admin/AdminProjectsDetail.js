@@ -214,12 +214,14 @@ function AdminProjectsDetail() {
                 {'(DEADLINE ' + project.end + ')'}
               </CCardText>
               <CCardText style={{ marginTop: '-10px' }}>
-                Description: {project.description}
+                <b>Description</b>: {project.description}
               </CCardText>
-              <CCardText>Members: </CCardText>
+              <CCardText>
+                <b>Members: </b>
+              </CCardText>
               {accounts.map((account, index) => (
                 <CCardText key={index} style={{ marginTop: '-20px' }}>
-                  {account.fullname + ' ' + account.username}
+                  &emsp;{account.fullname + ' ' + account.username}
                 </CCardText>
               ))}
             </CCol>
@@ -461,8 +463,8 @@ function AdminProjectsDetail() {
                   <CIcon icon={cilListFilter} />
                 </CInputGroupText>
                 <CFormInput
-                  placeholder="Discription"
-                  autoComplete="discription"
+                  placeholder="Description"
+                  autoComplete="description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />

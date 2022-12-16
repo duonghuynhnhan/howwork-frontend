@@ -187,6 +187,7 @@ function AdminProjects() {
                 <CTableHeaderCell scope="col">Leader</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Created Date</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Completed Date</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Updated Date</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Time to start</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Deadline</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Time to done</CTableHeaderCell>
@@ -214,6 +215,7 @@ function AdminProjects() {
                   <CTableDataCell>{project.fullname + ' ' + project.leader}</CTableDataCell>
                   <CTableDataCell>{project.createddate}</CTableDataCell>
                   <CTableDataCell>{project.completeddate}</CTableDataCell>
+                  <CTableDataCell>{project.updateddate}</CTableDataCell>
                   <CTableDataCell>{project.start}</CTableDataCell>
                   <CTableDataCell>{project.end}</CTableDataCell>
                   <CTableDataCell>{project.time} hours</CTableDataCell>
@@ -260,8 +262,8 @@ function AdminProjects() {
                   <CIcon icon={cilListFilter} />
                 </CInputGroupText>
                 <CFormInput
-                  placeholder="Discription"
-                  autoComplete="discription"
+                  placeholder="Description"
+                  autoComplete="description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />

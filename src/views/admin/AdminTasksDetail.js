@@ -116,6 +116,7 @@ function AdminTasksDetail() {
                 <CTableHeaderCell scope="col">User</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Created Date</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Completed Date</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Updated Date</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Time to start</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Deadline</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Time to done</CTableHeaderCell>
@@ -128,6 +129,7 @@ function AdminTasksDetail() {
                 <CTableDataCell>{tasks.fullname + ' ' + tasks.username}</CTableDataCell>
                 <CTableDataCell>{tasks.createddate}</CTableDataCell>
                 <CTableDataCell>{tasks.completeddate}</CTableDataCell>
+                <CTableDataCell>{tasks.updateddate}</CTableDataCell>
                 <CTableDataCell>{tasks.start}</CTableDataCell>
                 <CTableDataCell style={{ color: 'lightcoral' }}>{tasks.end}</CTableDataCell>
                 <CTableDataCell>{tasks.time} hours</CTableDataCell>

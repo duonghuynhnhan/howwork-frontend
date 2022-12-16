@@ -3,7 +3,6 @@ import { Login, ForgotPassword } from './account'
 import {
   AdminHomePage,
   AdminChangeInformation,
-  AdminNotifications,
   AdminProjects,
   AdminSummary,
   AdminCreateUser,
@@ -18,7 +17,6 @@ import {
 } from './admin'
 import {
   UserHomePage,
-  UserNotifications,
   UserTasks,
   UserProjects,
   UserSummary,
@@ -35,7 +33,6 @@ export {
   Login,
   ForgotPassword,
   AdminHomePage,
-  AdminNotifications,
   AdminChangeInformation,
   AdminProjects,
   AdminSummary,
@@ -49,7 +46,6 @@ export {
   AdminTasksDetail,
   AdminEditTask,
   UserHomePage,
-  UserNotifications,
   UserTasks,
   UserProjects,
   UserSummary,

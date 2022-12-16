@@ -1,6 +1,5 @@
 import {
   AdminHomePage,
-  AdminNotifications,
   AdminChangeInformation,
   AdminProjects,
   AdminSummary,
@@ -17,12 +16,6 @@ import {
 
 const adminRoutes = [
   { path: '/admin/home', exact: true, name: 'AdminHomePage', element: AdminHomePage },
-  {
-    path: '/admin/notifications',
-    exact: true,
-    name: 'AdminNotifications',
-    element: AdminNotifications,
-  },
   {
     path: '/admin/projects',
     exact: true,
