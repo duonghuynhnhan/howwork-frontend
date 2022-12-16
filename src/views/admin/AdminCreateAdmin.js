@@ -111,18 +111,22 @@ function AdminCreateAdmin() {
         role: 'admin',
       }
 
-      const data = await personService.create(payload)
-      if (data) {
-        setNoti(true)
-        setId('')
-        setUsername('')
-        setFullName('')
-        setDOB(new Date())
-        setEmail('')
-        setSex('')
-        setPhone('')
-        setPosition('')
-        setUnit('')
+      try {
+        const data = await personService.create(payload)
+        if (data) {
+          setNoti(true)
+          setId('')
+          setUsername('')
+          setFullName('')
+          setDOB(new Date())
+          setEmail('')
+          setSex('')
+          setPhone('')
+          setPosition('')
+          setUnit('')
+        }
+      } catch (e) {
+        alert('Information is invalid!!!')
       }
     } else {
       alert('Input full information, please!!!')
