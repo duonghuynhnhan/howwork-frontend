@@ -61,8 +61,8 @@ function AdminChangeKey() {
               <CCard className="mx-4">
                 <CCardBody className="p-4">
                   <CForm>
-                    <h1>Change Password</h1>
-                    <p className="text-medium-emphasis">Input Old & New Password</p>
+                    <h1>Change Key</h1>
+                    <p className="text-medium-emphasis">Input Old & New Key</p>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
                         <CIcon icon={cilLockLocked} />
@@ -98,7 +98,7 @@ function AdminChangeKey() {
                     </CInputGroup>
                     <div className="d-grid">
                       <CButton color="success" onClick={handleChangeKey}>
-                        Change Password
+                        Change Key
                       </CButton>
                     </div>
                   </CForm>

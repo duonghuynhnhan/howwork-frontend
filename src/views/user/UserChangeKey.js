@@ -61,8 +61,8 @@ function UserChangeKey() {
               <CCard className="mx-4">
                 <CCardBody className="p-4">
                   <CForm>
-                    <h1>Change Password</h1>
-                    <p className="text-medium-emphasis">Input Old & New Password</p>
+                    <h1>Change Key</h1>
+                    <p className="text-medium-emphasis">Input Old & New Key</p>
                     <CInputGroup className="mb-4">
                       <CInputGroupText>
                         <CIcon icon={cilLockLocked} />
