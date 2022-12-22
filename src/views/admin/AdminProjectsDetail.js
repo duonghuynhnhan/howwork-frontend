@@ -70,6 +70,7 @@ function AdminProjectsDetail() {
   const [time, setTime] = useState()
   const [account, setAccount] = useState()
   const [note, setNote] = useState('')
+  const [state, setState] = useState(0)
 
   let options = ['Select account']
   for (var i = 0; i < accounts.length; i++) {
@@ -158,7 +159,7 @@ function AdminProjectsDetail() {
 
     if (report) {
       await projectService.update(project_id, {
-        completedstate: 100,
+        completedstate: state,
         completeddate: moment().format('DD/MM/YYYY HH:mm:ss'),
       })
       setInputReport('')
@@ -352,21 +353,29 @@ function AdminProjectsDetail() {
                 )}
               </div>
             ) : username === project.leader ? (
-              <CFormInput
-                style={{ width: '99.2%', margin: '5px' }}
-                type="text"
-                id="floatingInput"
-                placeholder="Add report for this project..."
-                value={inputReport}
-                onChange={(e) => {
-                  setInputReport(e.target.value)
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' && inputReport.length > 0) {
-                    handleAddReport()
-                  }
-                }}
-              />
+              <>
+                <CFormInput
+                  style={{ width: '99.2%', margin: '5px' }}
+                  type="text"
+                  id="floatingInput"
+                  placeholder="Add report for this project..."
+                  value={inputReport}
+                  onChange={(e) => {
+                    setInputReport(e.target.value)
+                  }}
+                />
+                <CFormInput
+                  style={{ width: '99.2%', margin: '5px' }}
+                  type="text"
+                  id="floatingInput"
+                  placeholder="Add %..."
+                  value={state}
+                  onChange={(e) => {
+                    setState(e.target.value)
+                  }}
+                />
+                <CButton onClick={handleAddReport}>Add report</CButton>
+              </>
             ) : (
               <Fragment></Fragment>
             )}

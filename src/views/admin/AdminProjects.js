@@ -191,6 +191,7 @@ function AdminProjects() {
                 <CTableHeaderCell scope="col">Time to start</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Deadline</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Time to done</CTableHeaderCell>
+                <CTableHeaderCell scope="col">Completed State</CTableHeaderCell>
                 <CTableHeaderCell scope="col">Note</CTableHeaderCell>
               </CTableRow>
             </CTableHead>
@@ -219,6 +220,7 @@ function AdminProjects() {
                   <CTableDataCell>{project.start}</CTableDataCell>
                   <CTableDataCell>{project.end}</CTableDataCell>
                   <CTableDataCell>{project.time} hours</CTableDataCell>
+                  <CTableDataCell>{project.completedstate} %</CTableDataCell>
                   <CTableDataCell>{project.note}</CTableDataCell>
                 </CTableRow>
               ))}
